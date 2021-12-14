@@ -1,4 +1,4 @@
-package art.coded.wireframe.work;
+package art.coded.wireframe.ui.work;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

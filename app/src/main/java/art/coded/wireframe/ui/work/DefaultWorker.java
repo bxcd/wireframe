@@ -1,4 +1,4 @@
-package art.coded.wireframe.work;
+package art.coded.wireframe.ui.work;
 
 import android.app.Notification;
 import android.content.Context;
@@ -23,6 +23,9 @@ public class DefaultWorker extends Worker {
 
             // do task requiring guaranteed execution
             // (e.g. local/remote data sync, file i/o, image processing)
+            try { // placeholder
+                Thread.sleep(WorkConstants.DEFAULT_WORK_TIME_MILLIS);
+            } catch (InterruptedException e) { return Result.failure(); }
 
             WorkUtilities.loadNotificationChannel(
                     applicationContext,
@@ -44,6 +47,6 @@ public class DefaultWorker extends Worker {
 
             return Result.success();
 
-        } catch(Throwable t) { return Result.failure(); }
+        } catch (Throwable t) { return Result.failure(); }
     }
 }

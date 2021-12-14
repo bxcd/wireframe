@@ -40,4 +40,5 @@
     <string translatable="false" name="default_reply">reply</string>
     <string translatable="false" name="key_sync">sync</string>
     <string translatable="false" name="key_attachment">attachment</string>
+    <string name="menu_work">Work</string>
 </resources>
