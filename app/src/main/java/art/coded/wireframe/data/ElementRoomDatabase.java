@@ -12,6 +12,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 @Database(entities={Element.class}, version=1, exportSchema=false)
 public abstract class ElementRoomDatabase extends RoomDatabase {
 
+    private static final String LOG_TAG = ElementRoomDatabase.class.getSimpleName();
+
     public abstract ElementDao elementDao();
     private static ElementRoomDatabase INSTANCE;
 

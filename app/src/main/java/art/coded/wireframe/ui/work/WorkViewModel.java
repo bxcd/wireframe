@@ -1,6 +1,7 @@
 package art.coded.wireframe.ui.work;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,6 +13,8 @@ import androidx.work.WorkManager;
 import java.util.List;
 
 public class WorkViewModel extends ViewModel {
+
+    private static final String LOG_TAG = WorkViewModel.class.getSimpleName();
 
     WorkManager mWorkManager;
     LiveData<List<WorkInfo>> mWorkInfo;
@@ -46,6 +49,8 @@ public class WorkViewModel extends ViewModel {
 //        workContinuation.enqueue();
 
         mWorkManager.enqueue(workRequest);
+
+        Log.d(LOG_TAG, "enqueued");
     }
 
     void cancelWork() {

@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey;
 @Entity(tableName="element_table")
 public class Element {
 
+    private static final String LOG_TAG = Element.class.getSimpleName();
+
     @PrimaryKey @NonNull @ColumnInfo(name="element")
     private String mElement;
 

@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "art.coded.aad"
+        applicationId "art.coded.wireframe"
         minSdk 21
         targetSdk 31
         versionCode 1

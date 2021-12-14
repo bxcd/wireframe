@@ -9,6 +9,8 @@ import java.util.List;
 
 public class ElementRepository {
 
+    private static final String LOG_TAG = ElementRepository.class.getSimpleName();
+
     private ElementDao mElementDao;
     private LiveData<List<Element>> mAllElements;
 

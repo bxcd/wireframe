@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import art.coded.wireframe.data.Element;
 import art.coded.wireframe.databinding.ActivityDetailBinding;
 
 public class DetailActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = Element.class.getSimpleName();
 
     private ActivityDetailBinding binding;
 

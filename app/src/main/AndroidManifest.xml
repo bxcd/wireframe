@@ -8,13 +8,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AAD">
+        android:theme="@style/Theme.wireframe">
         <activity
             android:name="art.coded.wireframe.ui.DetailActivity"
             android:exported="false"
             android:label="@string/title_activity_detail"
             android:parentActivityName="art.coded.wireframe.ui.TabActivity"
-            android:theme="@style/Theme.AAD.NoActionBar">
+            android:theme="@style/Theme.wireframe.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="art.coded.wireframe.ui.TabActivity" />
@@ -24,7 +24,7 @@
             android:exported="false"
             android:label="@string/title_activity_settings"
             android:parentActivityName="art.coded.wireframe.ui.MainActivity"
-            android:theme="@style/Theme.AAD.NoActionBar">
+            android:theme="@style/Theme.wireframe.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="art.coded.wireframe.ui.MainActivity" />
@@ -34,7 +34,7 @@
             android:exported="false"
             android:label="@string/title_activity_tab"
             android:parentActivityName="art.coded.wireframe.ui.MainActivity"
-            android:theme="@style/Theme.AAD.NoActionBar">
+            android:theme="@style/Theme.wireframe.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="art.coded.wireframe.ui.MainActivity" />
@@ -43,7 +43,7 @@
             android:name="art.coded.wireframe.ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AAD.NoActionBar">
+            android:theme="@style/Theme.wireframe.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

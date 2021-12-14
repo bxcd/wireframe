@@ -9,12 +9,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import art.coded.wireframe.R;
+import art.coded.wireframe.data.Element;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
 public class TabPagerAdapter extends FragmentPagerAdapter {
+
+    static final String LOG_TAG = TabPagerAdapter.class.getSimpleName();
 
     @StringRes private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
     private final Context mContext;

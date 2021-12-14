@@ -8,8 +8,11 @@ import androidx.lifecycle.ViewModel;
 import androidx.preference.PreferenceManager;
 
 import art.coded.wireframe.R;
+import art.coded.wireframe.data.Element;
 
 public class HomeViewModel extends ViewModel {
+
+    static final String LOG_TAG = HomeViewModel.class.getSimpleName();
 
     private MutableLiveData<String> mText;
 

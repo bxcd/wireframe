@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
 
+import art.coded.wireframe.data.Element;
+
 final class WorkUtilities {
 
     static void loadNotificationChannel(

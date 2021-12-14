@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
 import art.coded.wireframe.R;
+import art.coded.wireframe.data.Element;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = Element.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

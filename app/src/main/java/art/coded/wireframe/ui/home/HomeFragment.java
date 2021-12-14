@@ -10,9 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import art.coded.wireframe.data.Element;
 import art.coded.wireframe.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
+
+    static final String LOG_TAG = HomeFragment.class.getSimpleName();
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;

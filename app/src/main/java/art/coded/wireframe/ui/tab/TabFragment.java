@@ -10,12 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import art.coded.wireframe.data.Element;
 import art.coded.wireframe.databinding.FragmentTabBinding;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class TabFragment extends Fragment {
+
+    static final String LOG_TAG = TabFragment.class.getSimpleName();
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 

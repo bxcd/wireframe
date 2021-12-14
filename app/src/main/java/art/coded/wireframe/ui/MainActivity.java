@@ -17,9 +17,12 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import art.coded.wireframe.data.Element;
 import art.coded.wireframe.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = Element.class.getSimpleName();
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;

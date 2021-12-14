@@ -1,12 +1,12 @@
 package art.coded.wireframe.ui.work;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +16,8 @@ import androidx.work.WorkInfo;
 import art.coded.wireframe.databinding.FragmentWorkBinding;
 
 public class WorkFragment extends Fragment {
+
+    static final String LOG_TAG = WorkFragment.class.getSimpleName();
 
     private WorkViewModel mViewModel;
     private FragmentWorkBinding binding;
@@ -45,12 +47,14 @@ public class WorkFragment extends Fragment {
                 startButton.setVisibility(View.VISIBLE);
                 cancelButton.setVisibility(View.INVISIBLE);
                 progressBar.setVisibility(View.INVISIBLE);
+                Log.d(LOG_TAG, "finished");
 
             } else {
 
                 startButton.setVisibility(View.INVISIBLE);
                 cancelButton.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
+                Log.d(LOG_TAG, "working");
             }
         });
 

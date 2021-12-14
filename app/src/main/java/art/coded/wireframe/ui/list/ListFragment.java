@@ -18,6 +18,8 @@ import art.coded.wireframe.databinding.FragmentListBinding;
 
 public class ListFragment extends Fragment {
 
+    static final String LOG_TAG = ListFragment.class.getSimpleName();
+
     private ListViewModel listViewModel;
     private FragmentListBinding binding;
 

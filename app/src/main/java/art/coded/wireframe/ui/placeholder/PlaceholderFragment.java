@@ -10,9 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import art.coded.wireframe.data.Element;
 import art.coded.wireframe.databinding.FragmentPlaceholderBinding;
 
 public class PlaceholderFragment extends Fragment {
+
+    static final String LOG_TAG = PlaceholderFragment.class.getSimpleName();
 
     private PlaceholderViewModel placeholderViewModel;
     private FragmentPlaceholderBinding binding;
