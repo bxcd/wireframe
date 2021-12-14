@@ -10,9 +10,6 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import art.coded.wireframe.R;
-import art.coded.wireframe.data.Element;
-
 public class DefaultWorker extends Worker {
 
     static final String LOG_TAG = DefaultWorker.class.getSimpleName();
@@ -27,12 +24,6 @@ public class DefaultWorker extends Worker {
 
         try {
 
-            // do task requiring guaranteed execution
-            // (e.g. local/remote data sync, file i/o, image processing)
-            try { // placeholder
-                Thread.sleep(WorkConstants.DEFAULT_WORK_TIME_MILLIS);
-            } catch (InterruptedException e) { Log.d(LOG_TAG, "failure" + e.getMessage()); return Result.failure(); }
-
             WorkUtilities.loadNotificationChannel(
                     applicationContext,
                     WorkConstants.CHANNEL_ID,
@@ -40,17 +31,35 @@ public class DefaultWorker extends Worker {
                     WorkConstants.CHANNEL_DESCRIPTION,
                     WorkConstants.CHANNEL_IMPORTANCE);
 
-            Notification notification =
+            Notification notificationStarted =
                     new NotificationCompat.Builder(applicationContext, WorkConstants.CHANNEL_ID)
                             .setSmallIcon(android.R.drawable.ic_menu_manage)
-                            .setContentTitle(WorkConstants.NOTIFICATION_TITLE)
-                            .setContentText(WorkConstants.NOTIFICATION_MESSAGE)
+                            .setContentTitle(WorkConstants.NOTIFICATION_TITLE_STARTED)
+                            .setContentText(WorkConstants.NOTIFICATION_MESSAGE_STARTED)
                             .setPriority(NotificationCompat.PRIORITY_HIGH)
                             .setVibrate(new long[0])
                             .build();
 
             NotificationManagerCompat.from(applicationContext)
-                    .notify(WorkConstants.NOTIFICATION_ID, notification);
+                    .notify(WorkConstants.NOTIFICATION_ID_STARTED, notificationStarted);
+
+            // do task requiring guaranteed execution
+            // (e.g. local/remote data sync, file i/o, image processing)
+            try { // placeholder
+                Thread.sleep(WorkConstants.DEFAULT_WORK_TIME_MILLIS);
+            } catch (InterruptedException e) { Log.d(LOG_TAG, "failure" + e.getMessage()); return Result.failure(); }
+
+            Notification notificationFinished =
+                    new NotificationCompat.Builder(applicationContext, WorkConstants.CHANNEL_ID)
+                            .setSmallIcon(android.R.drawable.ic_menu_manage)
+                            .setContentTitle(WorkConstants.NOTIFICATION_TITLE_FINISHED)
+                            .setContentText(WorkConstants.NOTIFICATION_MESSAGE_FINISHED)
+                            .setPriority(NotificationCompat.PRIORITY_HIGH)
+                            .setVibrate(new long[0])
+                            .build();
+
+            NotificationManagerCompat.from(applicationContext)
+                    .notify(WorkConstants.NOTIFICATION_ID_FINISHED, notificationFinished);
 
             Log.d(LOG_TAG, "success");
 
