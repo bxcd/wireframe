@@ -6,7 +6,9 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.work.Constraints;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkContinuation;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
@@ -29,12 +31,6 @@ public class WorkViewModel extends ViewModel {
 
     void applyWork() {
 
-//        WorkContinuation workContinuation = mWorkManager.beginUniqueWork(
-//                WorkConstants.DEFAULT_WORK_NAME,
-//                ExistingWorkPolicy.REPLACE,
-//                OneTimeWorkRequest.from(DifferentWorker.class)
-//        ); workContinuation.enqueue();
-
         Constraints constraints = new Constraints.Builder()
                 // set constraints for OneTimeWorkRequest
                 .build();
@@ -44,16 +40,22 @@ public class WorkViewModel extends ViewModel {
                 .addTag(WorkConstants.DEFAULT_WORK_TAG)
                 .build();
 
-//        workContinuation = workContinuation.then(workRequest);
-//         chain additional requests
-//        workContinuation.enqueue();
+        WorkContinuation workContinuation = mWorkManager.beginUniqueWork(
+                WorkConstants.DEFAULT_WORK_NAME,
+                ExistingWorkPolicy.REPLACE,
+                workRequest
+        ); workContinuation.enqueue();
 
-        mWorkManager.enqueue(workRequest);
+        workContinuation = workContinuation.then(workRequest);
+//         chain additional requests
+        workContinuation.enqueue();
+
+//        mWorkManager.enqueue(workRequest);
 
         Log.d(LOG_TAG, "enqueued");
     }
 
     void cancelWork() {
-        mWorkManager.cancelUniqueWork(WorkConstants.DEFAULT_WORK_TAG);
+        mWorkManager.cancelUniqueWork(WorkConstants.DEFAULT_WORK_NAME);
     }
 }
