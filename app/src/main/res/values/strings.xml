@@ -4,6 +4,8 @@
     <string name="nav_header_subtitle">Menu</string>
     <string name="menu_home">Home</string>
     <string name="menu_list">List</string>
+    <string name="menu_work">Work</string>
+    <string name="menu_paging">Paging</string>
     <string name="menu_placeholder">Placeholder</string>
     <string name="title_activity_tab">Tab Activity</string>
     <string name="title_activity_detail">Detail Activity</string>
@@ -40,5 +42,4 @@
     <string translatable="false" name="default_reply">reply</string>
     <string translatable="false" name="key_sync">sync</string>
     <string translatable="false" name="key_attachment">attachment</string>
-    <string name="menu_work">Work</string>
 </resources>

@@ -11,6 +11,7 @@ public class Element {
     private static final String LOG_TAG = Element.class.getSimpleName();
 
     @PrimaryKey @NonNull @ColumnInfo(name="element")
+//    private Integer mId;
     private String mElement;
 
     public Element(@NonNull String element) { mElement = element; }

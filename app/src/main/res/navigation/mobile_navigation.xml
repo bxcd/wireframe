@@ -24,6 +24,12 @@
         tools:layout="@layout/fragment_work" />
 
     <fragment
+        android:id="@+id/nav_paging"
+        android:name="art.coded.wireframe.ui.paging.PagingFragment"
+        android:label="@string/menu_paging"
+        tools:layout="@layout/fragment_paging" />
+
+    <fragment
         android:id="@+id/nav_placeholder"
         android:name="art.coded.wireframe.ui.placeholder.PlaceholderFragment"
         android:label="@string/menu_placeholder"
