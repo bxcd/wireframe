@@ -14,6 +14,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:name="art.coded.wireframe.ui.detail.DetailFragment"/>
+        android:name="art.coded.wireframe.view.fragment.DetailFragment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

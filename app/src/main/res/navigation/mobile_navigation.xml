@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="art.coded.wireframe.ui.home.HomeFragment"
+        android:name="art.coded.wireframe.view.fragment.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_list"
-        android:name="art.coded.wireframe.ui.list.ListFragment"
+        android:name="art.coded.wireframe.view.fragment.ListFragment"
         android:label="@string/menu_list"
         tools:layout="@layout/fragment_list"/>
 
     <fragment
         android:id="@+id/nav_work"
-        android:name="art.coded.wireframe.ui.work.WorkFragment"
+        android:name="art.coded.wireframe.view.fragment.WorkFragment"
         android:label="@string/menu_work"
         tools:layout="@layout/fragment_work" />
 
     <fragment
         android:id="@+id/nav_paging"
-        android:name="art.coded.wireframe.ui.paging.PagingFragment"
+        android:name="art.coded.wireframe.view.fragment.PagingFragment"
         android:label="@string/menu_paging"
         tools:layout="@layout/fragment_paging" />
 
     <fragment
         android:id="@+id/nav_placeholder"
-        android:name="art.coded.wireframe.ui.placeholder.PlaceholderFragment"
+        android:name="art.coded.wireframe.view.fragment.PlaceholderFragment"
         android:label="@string/menu_placeholder"
         tools:layout="@layout/fragment_placeholder" />
 

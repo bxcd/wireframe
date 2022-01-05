@@ -10,37 +10,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.wireframe">
         <activity
-            android:name="art.coded.wireframe.ui.DetailActivity"
+            android:name="art.coded.wireframe.view.DetailActivity"
             android:exported="false"
             android:label="@string/title_activity_detail"
-            android:parentActivityName="art.coded.wireframe.ui.TabActivity"
+            android:parentActivityName="art.coded.wireframe.view.TabActivity"
             android:theme="@style/Theme.wireframe.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="art.coded.wireframe.ui.TabActivity" />
+                android:value="art.coded.wireframe.view.TabActivity" />
         </activity>
         <activity
-            android:name="art.coded.wireframe.ui.SettingsActivity"
+            android:name="art.coded.wireframe.view.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="art.coded.wireframe.ui.MainActivity"
+            android:parentActivityName="art.coded.wireframe.view.MainActivity"
             android:theme="@style/Theme.wireframe.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="art.coded.wireframe.ui.MainActivity" />
+                android:value="art.coded.wireframe.view.MainActivity" />
         </activity>
         <activity
-            android:name="art.coded.wireframe.ui.TabActivity"
+            android:name="art.coded.wireframe.view.TabActivity"
             android:exported="false"
             android:label="@string/title_activity_tab"
-            android:parentActivityName="art.coded.wireframe.ui.MainActivity"
+            android:parentActivityName="art.coded.wireframe.view.MainActivity"
             android:theme="@style/Theme.wireframe.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="art.coded.wireframe.ui.MainActivity" />
+                android:value="art.coded.wireframe.view.MainActivity" />
         </activity>
         <activity
-            android:name="art.coded.wireframe.ui.MainActivity"
+            android:name="art.coded.wireframe.view.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.wireframe.NoActionBar">
