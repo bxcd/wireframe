@@ -42,7 +42,7 @@ public class DetailFragment extends Fragment {
         submitButton.setOnClickListener(submitView -> {
                 Editable elementText = editText.getText();
                 if (elementText != null) {
-                    Element element = new Element(elementText.toString());
+                    Element element = new Element(elementText.toString(), hashCode());
                     detailViewModel.addData(element);
                     editText.setText("");
                 }

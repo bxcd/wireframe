@@ -10,10 +10,14 @@ public class Element {
 
     private static final String LOG_TAG = Element.class.getSimpleName();
 
-    @PrimaryKey @NonNull @ColumnInfo(name="element")
-//    private Integer mId;
-    private String mElement;
+    @PrimaryKey @NonNull @ColumnInfo(name="id")
+    private Integer mId;
+    private String mName;
 
-    public Element(@NonNull String element) { mElement = element; }
-    @NonNull public String getElement() { return mElement; }
+    public Element(@NonNull String name, Integer id) {
+        mId = id;
+        mName = name;
+    }
+    @NonNull public Integer getId() { return mId; }
+    @NonNull public String getName() { return mName; }
 }

@@ -4,6 +4,8 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
 
 import java.util.List;
 
@@ -28,6 +30,9 @@ public class ElementRepository {
     public void insert(Element element) { new InsertAsyncTask(mElementDao).execute(element); }
     public void delete(Element element) { new DeleteAsyncTask(mElementDao).execute(element); }
     public void deleteAll() { new DeleteAllAsyncTask(mElementDao).execute(); }
+    public LiveData<PagedList<Element>> getPagedListLocal() {
+        return new LivePagedListBuilder<>(mElementDao.pagingSource(), 15).build();
+    }
 
     private static class InsertAsyncTask extends AsyncTask<Element, Void, Void> {
 

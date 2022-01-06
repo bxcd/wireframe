@@ -45,7 +45,6 @@ public abstract class ElementRoomDatabase extends RoomDatabase {
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
 
         ElementDao mElementDao;
-        String[] words = { "test1", "test2", "test3" };
 
         public PopulateDbAsyncTask(ElementRoomDatabase db) {
             mElementDao = db.elementDao();
@@ -53,7 +52,10 @@ public abstract class ElementRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            if (mElementDao.getAny().length < 1) for (String w : words) mElementDao.insert(new Element(w));
+            if (mElementDao.getAny().length < 1)
+                for (int i = 0; i < 100; i++) {
+                    mElementDao.insert(new Element(String.format("test%s", i), i));
+                }
             return null;
         }
     }

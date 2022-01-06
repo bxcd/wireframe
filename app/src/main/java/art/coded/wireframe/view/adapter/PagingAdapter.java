@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ShareCompat;
-import androidx.paging.PagingDataAdapter;
+import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import art.coded.wireframe.R;
 import art.coded.wireframe.model.entity.Element;
 
-public class PagingAdapter extends PagingDataAdapter<Element, PagingAdapter.ElementViewHolder> {
+public class PagingAdapter extends PagedListAdapter<Element, PagingAdapter.ElementViewHolder> {
 
     LayoutInflater mLayoutInflater;
     Activity mActivity;
@@ -24,6 +24,7 @@ public class PagingAdapter extends PagingDataAdapter<Element, PagingAdapter.Elem
     public PagingAdapter(@NonNull DiffUtil.ItemCallback<Element> diffCallback, Activity activity) {
         super(diffCallback);
         mActivity = activity;
+        mLayoutInflater = LayoutInflater.from(mActivity);
     }
 
     @NonNull @Override public ElementViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,7 +34,7 @@ public class PagingAdapter extends PagingDataAdapter<Element, PagingAdapter.Elem
 
     @Override public void onBindViewHolder(@NonNull ElementViewHolder holder, int position) {
         Element element = getItem(position);
-        holder.mItemView.setText(element == null ? "No elements" : element.getElement());
+        holder.mItemView.setText(element == null ? "No elements" : element.getName());
     }
 
     static class ElementViewHolder extends RecyclerView.ViewHolder {
