@@ -8,7 +8,6 @@ import androidx.paging.PagedList;
 
 import art.coded.wireframe.model.entity.Element;
 import art.coded.wireframe.model.ElementRepository;
-import art.coded.wireframe.model.local.ElementRoomDatabase;
 
 public class PagingViewModel extends ViewModel {
 
@@ -20,6 +19,6 @@ public class PagingViewModel extends ViewModel {
 
     public void removeData(Element element) { mRepository.delete(element); }
     public LiveData<PagedList<Element>> elementList() {
-        return (mRepository.getPagedListLocal());
+        return (mRepository.getPagedList());
     }
 }

@@ -30,7 +30,7 @@ public class ElementRepository {
     public void insert(Element element) { new InsertAsyncTask(mElementDao).execute(element); }
     public void delete(Element element) { new DeleteAsyncTask(mElementDao).execute(element); }
     public void deleteAll() { new DeleteAllAsyncTask(mElementDao).execute(); }
-    public LiveData<PagedList<Element>> getPagedListLocal() {
+    public LiveData<PagedList<Element>> getPagedList() {
         return new LivePagedListBuilder<>(mElementDao.pagingSource(), 15).build();
     }
 
