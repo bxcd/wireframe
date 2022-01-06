@@ -2,6 +2,7 @@ package art.coded.wireframe.view.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+import art.coded.wireframe.model.entity.Element;
 import art.coded.wireframe.model.entity.ElementComparator;
 import art.coded.wireframe.databinding.FragmentPagingBinding;
 import art.coded.wireframe.view.adapter.PagingAdapter;
@@ -32,6 +36,7 @@ public class PagingFragment extends Fragment {
 
         Activity activity = getActivity();
 
+
         final RecyclerView recyclerView = binding.rvPaging;
         PagingAdapter pagingAdapter = new PagingAdapter(new ElementComparator(), requireActivity());
         recyclerView.setAdapter(pagingAdapter);
@@ -40,6 +45,9 @@ public class PagingFragment extends Fragment {
         pagingViewModel =
                 new ViewModelProvider(this).get(PagingViewModel.class);
         pagingViewModel.loadData(requireActivity().getApplication());
+//        List<Element> elements = pagingViewModel.elementList().getValue();
+
+        pagingViewModel.elementList().observe(requireActivity(), pagingAdapter::submitList);
 
         return root;
     }

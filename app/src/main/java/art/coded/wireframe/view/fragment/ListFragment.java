@@ -58,7 +58,7 @@ public class ListFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int adapterPosition = viewHolder.getAdapterPosition();
-                Element element = listAdapter.getElementByPosition(adapterPosition);
+                Element element = listAdapter.getNameByPosition(adapterPosition);
                 listViewModel.removeData(element);
             }
         }); touchHelper.attachToRecyclerView(recyclerView);

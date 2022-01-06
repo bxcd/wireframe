@@ -41,7 +41,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ElementViewHol
         if (mAllElements != null) {
 
             Element element = mAllElements.get(position);
-            holder.mItemView.setText(element == null ? "No elements" : element.getElement());
+            holder.mItemView.setText(element == null ? "No elements" : element.getName());
         }
     }
 
@@ -55,7 +55,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ElementViewHol
         notifyDataSetChanged();
     }
 
-    public Element getElementByPosition(int position) { return mAllElements.get(position); }
+    public Element getNameByPosition(int position) { return mAllElements.get(position); }
 
     static class ElementViewHolder extends RecyclerView.ViewHolder {
 

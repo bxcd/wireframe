@@ -1,6 +1,7 @@
 package art.coded.wireframe.model.local;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -19,6 +20,6 @@ import art.coded.wireframe.model.entity.Element;
     @Query("SELECT * from element_table LIMIT 1") Element[] getAny();
     @Query("DELETE from element_table") void deleteAll();
 
-//    @Query("SELECT * from element_table WHERE element LIKE :query")
-//    PagingSource<Integer, Element> pagingSource(String query);
+    @Query("SELECT * from element_table")
+    DataSource.Factory<Integer, Element> pagingSource();
 }
