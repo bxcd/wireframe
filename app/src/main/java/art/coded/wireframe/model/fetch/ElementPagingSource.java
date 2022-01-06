@@ -1,4 +1,4 @@
-package art.coded.wireframe.model.source;
+package art.coded.wireframe.model.fetch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
