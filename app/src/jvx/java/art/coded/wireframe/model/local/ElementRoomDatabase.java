@@ -11,6 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import art.coded.wireframe.model.entity.Element;
 
+// TODO: Repopulate Dao with dummy data after list clear
 @Database(entities={Element.class}, version=1, exportSchema=false)
 public abstract class ElementRoomDatabase extends RoomDatabase {
 
