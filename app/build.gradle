@@ -34,7 +34,22 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        ktx {
+            dimension "version"
+            applicationIdSuffix ".ktx"
+            versionNameSuffix "-ktx"
+        }
+        jvx {
+            dimension "version"
+            applicationIdSuffix ".jvx"
+            versionNameSuffix "-jvx"
+        }
+    }
 }
+
 
 dependencies {
 
