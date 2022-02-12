@@ -11,13 +11,13 @@ import art.coded.wireframe.model.entity.Element
 @Database(entities = [Element::class], version = 1, exportSchema = false)
 abstract class ElementRoomDatabase : RoomDatabase() {
     abstract fun elementDao(): ElementDao
-    private class PopulateDbAsyncTask(db: ElementRoomDatabase?) : AsyncTask<Void, Void, Void>() {
+    private class PopulateDbAsyncTask(db: ElementRoomDatabase?) : AsyncTask<Void?, Void?, Void?>() {
         var mElementDao: ElementDao
-        override fun doInBackground(vararg voids: Void): Void {
+        override fun doInBackground(vararg voids: Void?): Void? {
             if (mElementDao.any.size < 1) for (i in 0..99) {
                 mElementDao.insert(Element(String.format("test%s", i), i))
             }
-            return voids[0]
+            return null
         }
 
         init {
