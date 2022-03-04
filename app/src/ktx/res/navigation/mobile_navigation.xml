@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="art.coded.wireframe.view.fragment.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_list"
+        android:name="art.coded.wireframe.view.fragment.ListFragment"
+        android:label="@string/menu_list"
+        tools:layout="@layout/fragment_list"/>
+
+    <fragment
+        android:id="@+id/nav_work"
+        android:name="art.coded.wireframe.view.fragment.WorkFragment"
+        android:label="@string/menu_work"
+        tools:layout="@layout/fragment_work" />
+
+    <fragment
+        android:id="@+id/nav_paging"
+        android:name="art.coded.wireframe.view.fragment.PagingFragment"
+        android:label="@string/menu_paging"
+        tools:layout="@layout/fragment_paging" />
+
+    <fragment
+        android:id="@+id/nav_placeholder"
+        android:name="art.coded.wireframe.view.fragment.PlaceholderFragment"
+        android:label="@string/menu_placeholder"
+        tools:layout="@layout/fragment_placeholder" />
+
+</navigation>
