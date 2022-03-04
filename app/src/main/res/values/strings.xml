@@ -42,4 +42,11 @@
     <string translatable="false" name="default_reply">reply</string>
     <string translatable="false" name="key_sync">sync</string>
     <string translatable="false" name="key_attachment">attachment</string>
+
+    <!-- Levels -->
+    <string name="level_off">Off</string>
+    <string name="level_low">Low</string>
+    <string name="level_medium">Medium</string>
+    <string name="level_high">High</string>
+
 </resources>

@@ -5,8 +5,9 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -16,12 +17,36 @@ import art.coded.wireframe.R;
  * TODO: document your custom view class.
  */
 public class CustomView extends View {
+
+    private enum Level {
+        OFF { @Override public final int label() { return R.string.level_off; } },
+        LOW { @Override public final int label() { return R.string.level_low; } },
+        MEDIUM { @Override public final int label() { return R.string.level_medium; } },
+        HIGH { @Override public final int label() { return R.string.level_high; } };
+        abstract public int label();
+        public Level next() {
+            switch(label()) {
+                case R.string.level_off: return LOW;
+                case R.string.level_low: return MEDIUM;
+                case R.string.level_medium: return HIGH;
+                default: return OFF;
+            }
+        }
+    }
+
+    private final int RADIUS_OFFSET_LABEL = 30;
+    private final int RADIUS_OFFSET_INDICATOR = -35;
+
+    private float mRadius = 0.0f;
+    private final PointF mPointPosition = new PointF(0.0f, 0.0f);
+    private Level mLevel = Level.OFF;
+
     private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
     private float mExampleDimension = 0; // TODO: use a default from R.dimen...
     private Drawable mExampleDrawable;
 
-    private TextPaint mTextPaint;
+    private Paint mPaint;
     private float mTextWidth;
     private float mTextHeight;
 
@@ -64,21 +89,35 @@ public class CustomView extends View {
 
         a.recycle();
 
-        // Set up a default TextPaint object
-        mTextPaint = new TextPaint();
-        mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setTextAlign(Paint.Align.LEFT);
+        setClickable(true);
+
+        // Set up a default Paint object
+        mPaint = new Paint();
+        mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setTextAlign(Paint.Align.CENTER);
+        mPaint.setTextSize(55.0f);
+        mPaint.setTypeface(Typeface.create("", Typeface.BOLD));
 
         // Update TextPaint and text measurements from attributes
         invalidateTextPaintAndMeasurements();
     }
 
-    private void invalidateTextPaintAndMeasurements() {
-        mTextPaint.setTextSize(mExampleDimension);
-        mTextPaint.setColor(mExampleColor);
-        mTextWidth = mTextPaint.measureText(mExampleString);
+    @Override public boolean performClick() {
+        if (super.performClick()) return true;
 
-        Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
+        mLevel = mLevel.next();
+        setContentDescription(getResources().getString(mLevel.label()));
+
+        invalidate();
+        return true;
+    }
+
+    private void invalidateTextPaintAndMeasurements() {
+        mPaint.setTextSize(mExampleDimension);
+        mPaint.setColor(mExampleColor);
+        mTextWidth = mPaint.measureText(mExampleString);
+
+        Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
         mTextHeight = fontMetrics.bottom;
     }
 
@@ -100,7 +139,7 @@ public class CustomView extends View {
         canvas.drawText(mExampleString,
                 paddingLeft + (contentWidth - mTextWidth) / 2,
                 paddingTop + (contentHeight + mTextHeight) / 2,
-                mTextPaint);
+                mPaint);
 
         // Draw the example drawable on top of the text.
         if (mExampleDrawable != null) {
@@ -108,6 +147,37 @@ public class CustomView extends View {
                     paddingLeft + contentWidth, paddingTop + contentHeight);
             mExampleDrawable.draw(canvas);
         }
+
+        int color = (mLevel == Level.OFF) ? Color.GRAY : Color.GREEN;
+        mPaint.setColor(color);
+
+
+        canvas.drawCircle(getWidth()/ 2f, getHeight()/ 2f, mRadius, mPaint);
+
+        final float markerRadius = mRadius + RADIUS_OFFSET_INDICATOR;
+        computeXYForLevel(mLevel, markerRadius);
+        mPaint.setColor(Color.BLACK);
+        canvas.drawCircle(mPointPosition.x, mPointPosition.y, mRadius/12, mPaint);
+
+        final float labelRadius = mRadius + RADIUS_OFFSET_LABEL;
+        for (Level i : Level.values()) {
+            computeXYForLevel(i, labelRadius);
+            final String label = getResources().getString(i.label());
+            canvas.drawText(label, mPointPosition.x, mPointPosition.y, mPaint);
+        }
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        mRadius = Math.min(w, h) / 2.0f * 0.8f;
+    }
+
+    private void computeXYForLevel(Level pos, Float radius) {
+        // Angles are in radians.
+        final double startAngle = Math.PI * (9 / 8.0);
+        final double angle = startAngle + pos.ordinal() * (Math.PI / 4);
+        mPointPosition.x = ((float) (radius * Math.cos(angle))) + getWidth() / 2f;
+        mPointPosition.y = ((float) (radius * Math.sin(angle))) + getHeight() / 2f;
     }
 
     /**

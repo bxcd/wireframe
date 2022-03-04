@@ -1,25 +1,51 @@
 package art.coded.wireframe.view.custom
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.graphics.drawable.Drawable
-import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 import art.coded.wireframe.R
+import kotlin.math.cos
+import kotlin.math.min
+import kotlin.math.sin
+
+private enum class Level(val label : Int) {
+    OFF(R.string.level_off),
+    LOW(R.string.level_low),
+    MEDIUM(R.string.level_medium),
+    HIGH(R.string.level_high);
+
+    fun next() = when (this) {
+        OFF -> LOW
+        LOW -> MEDIUM
+        MEDIUM -> HIGH
+        HIGH -> OFF
+    }
+}
+
+private const val RADIUS_OFFSET_LABEL = 30
+private const val RADIUS_OFFSET_INDICATOR = -35
 
 /**
  * TODO: document your custom view class.
  */
-class CustomView : View {
+class CustomView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyle: Int = 0
+) : View(context, attrs, defStyle) {
+
+    private var radius = 0.0f
+    private var level = Level.OFF
+    private val pointPosition: PointF = PointF(0.0f, 0.0f)
+
+    private lateinit var paint : Paint;
 
     private var _exampleString: String? = null // TODO: use a default from R.string...
     private var _exampleColor: Int = Color.RED // TODO: use a default from R.color...
     private var _exampleDimension: Float = 0f // TODO: use a default from R.dimen...
 
-    private lateinit var textPaint: TextPaint
     private var textWidth: Float = 0f
     private var textHeight: Float = 0f
 
@@ -58,22 +84,6 @@ class CustomView : View {
      */
     var exampleDrawable: Drawable? = null
 
-    constructor(context: Context) : super(context) {
-        init(null, 0)
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(attrs, 0)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
-        context,
-        attrs,
-        defStyle
-    ) {
-        init(attrs, defStyle)
-    }
-
     private fun init(attrs: AttributeSet?, defStyle: Int) {
         // Load attributes
         val a = context.obtainStyledAttributes(
@@ -103,18 +113,31 @@ class CustomView : View {
 
         a.recycle()
 
-        // Set up a default TextPaint object
-        textPaint = TextPaint().apply {
-            flags = Paint.ANTI_ALIAS_FLAG
-            textAlign = Paint.Align.LEFT
+        isClickable = true;
+
+        paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            style = Paint.Style.FILL
+            textAlign = Paint.Align.CENTER
+            textSize = 55.0f
+            typeface = Typeface.create( "", Typeface.BOLD)
         }
 
         // Update TextPaint and text measurements from attributes
         invalidateTextPaintAndMeasurements()
     }
 
+    override fun performClick(): Boolean {
+        if (super.performClick()) return true
+
+        level = level.next()
+        contentDescription = resources.getString(level.label)
+
+        invalidate()
+        return true
+    }
+
     private fun invalidateTextPaintAndMeasurements() {
-        textPaint.let {
+        paint.let {
             it.textSize = exampleDimension
             it.color = exampleColor
             textWidth = it.measureText(exampleString)
@@ -141,7 +164,7 @@ class CustomView : View {
                 it,
                 paddingLeft + (contentWidth - textWidth) / 2,
                 paddingTop + (contentHeight + textHeight) / 2,
-                textPaint
+                paint
             )
         }
 
@@ -153,5 +176,33 @@ class CustomView : View {
             )
             it.draw(canvas)
         }
+
+        paint.color = if (level == Level.OFF) Color.GRAY else Color.GREEN
+
+        canvas.drawCircle((width / 2).toFloat(), (height / 2).toFloat(), radius, paint)
+
+        val markerRadius = radius + RADIUS_OFFSET_INDICATOR
+        pointPosition.computeXYForLevel(level, markerRadius)
+        paint.color = Color.BLACK
+        canvas.drawCircle(pointPosition.x, pointPosition.y, radius/12, paint)
+
+        val labelRadius = radius + RADIUS_OFFSET_LABEL
+        for (i in Level.values()) {
+            pointPosition.computeXYForLevel(i, labelRadius)
+            val label = resources.getString(i.label)
+            canvas.drawText(label, pointPosition.x, pointPosition.y, paint)
+        }
+    }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        radius = (min(w, h) / 2.0 * 0.8).toFloat()
+    }
+
+    private fun PointF.computeXYForLevel(pos: Level, radius: Float) {
+        // Angles are in radians.
+        val startAngle = Math.PI * (9 / 8.0)
+        val angle = startAngle + pos.ordinal * (Math.PI / 4)
+        x = (radius * cos(angle)).toFloat() + width / 2
+        y = (radius * sin(angle)).toFloat() + height / 2
     }
 }
