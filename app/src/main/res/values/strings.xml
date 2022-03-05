@@ -48,5 +48,7 @@
     <string name="level_low">Low</string>
     <string name="level_medium">Medium</string>
     <string name="level_high">High</string>
+    <string name="change">Change</string>
+    <string name="reset">Reset</string>
 
 </resources>
