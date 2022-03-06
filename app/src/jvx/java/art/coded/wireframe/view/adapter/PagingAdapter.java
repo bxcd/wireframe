@@ -18,6 +18,8 @@ import art.coded.wireframe.model.entity.Element;
 
 public class PagingAdapter extends PagedListAdapter<Element, PagingAdapter.ElementViewHolder> {
 
+    private static final String LOG_TAG = PagingAdapter.class.getSimpleName();
+
     LayoutInflater mLayoutInflater;
     Activity mActivity;
 

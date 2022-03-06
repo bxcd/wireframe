@@ -17,7 +17,7 @@ import art.coded.wireframe.view.fragment.TabFragment;
  */
 public class TabPagerAdapter extends FragmentPagerAdapter {
 
-    static final String LOG_TAG = TabPagerAdapter.class.getSimpleName();
+    private static final String LOG_TAG = TabPagerAdapter.class.getSimpleName();
 
     @StringRes private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
     private final Context mContext;

@@ -7,13 +7,15 @@ import art.coded.wireframe.model.ElementRepository
 import androidx.lifecycle.ViewModel
 import art.coded.wireframe.model.entity.Element
 
+private val LOG_TAG = PagingViewModel::class.java.simpleName
+
 class PagingViewModel : ViewModel() {
     var mRepository: ElementRepository? = null
-    fun loadData(application: Application?) {
+    fun loadData(application: Application) {
         mRepository = ElementRepository(application)
     }
 
-    fun removeData(element: Element?) {
+    fun removeData(element: Element) {
         mRepository!!.delete(element)
     }
 

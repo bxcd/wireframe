@@ -11,23 +11,24 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import art.coded.wireframe.databinding.FragmentWorkBinding
 
+private val LOG_TAG = WorkFragment::class.java.simpleName
+
 class WorkFragment : Fragment() {
-    private var mViewModel: WorkViewModel? = null
     private var binding: FragmentWorkBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentWorkBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
         val progressBar = binding!!.workProgressBar
         val startButton = binding!!.workStartButton
         val cancelButton = binding!!.workCancelButton
-        mViewModel = ViewModelProvider(this).get(WorkViewModel::class.java)
-        mViewModel!!.loadData(requireActivity().application)
-        startButton.setOnClickListener { v: View? -> mViewModel!!.applyWork() }
-        cancelButton.setOnClickListener { v: View? -> mViewModel!!.cancelWork() }
-        mViewModel!!.workInfo!!.observe(viewLifecycleOwner) { workInfoList: List<WorkInfo?>? ->
+        val workViewModel = ViewModelProvider(this).get(WorkViewModel::class.java)
+        workViewModel.loadData(requireActivity().application)
+        startButton.setOnClickListener { v: View -> workViewModel.applyWork() }
+        cancelButton.setOnClickListener { v: View -> workViewModel.cancelWork() }
+        workViewModel.workInfo!!.observe(viewLifecycleOwner) { workInfoList: List<WorkInfo?>? ->
             if (workInfoList == null || workInfoList.isEmpty()) return@observe
             val workInfo = workInfoList[0]
             if (workInfo!!.state.isFinished) {
@@ -48,9 +49,5 @@ class WorkFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-
-    companion object {
-        val LOG_TAG = WorkFragment::class.java.simpleName
     }
 }

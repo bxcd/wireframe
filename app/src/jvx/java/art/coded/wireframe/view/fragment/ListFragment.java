@@ -20,7 +20,7 @@ import art.coded.wireframe.viewmodel.ListViewModel;
 
 public class ListFragment extends Fragment {
 
-    static final String LOG_TAG = ListFragment.class.getSimpleName();
+    private static final String LOG_TAG = ListFragment.class.getSimpleName();
 
     private ListViewModel listViewModel;
     private FragmentListBinding binding;
@@ -42,7 +42,7 @@ public class ListFragment extends Fragment {
                 new ViewModelProvider(this).get(ListViewModel.class);
         listViewModel.loadData(requireActivity().getApplication());
         listViewModel.getData().observe(getViewLifecycleOwner(),
-                elementList -> listAdapter.setElements(elementList));
+                listAdapter::setElements);
 
         ItemTouchHelper touchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -57,7 +57,7 @@ public class ListFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                int adapterPosition = viewHolder.getAdapterPosition();
+                int adapterPosition = viewHolder.getBindingAdapterPosition();
                 Element element = listAdapter.getNameByPosition(adapterPosition);
                 listViewModel.removeData(element);
             }

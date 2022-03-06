@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DetailViewModel extends ViewModel {
 
-    static final String LOG_TAG = DetailViewModel.class.getSimpleName();
+    private static final String LOG_TAG = DetailViewModel.class.getSimpleName();
 
     private LiveData<List<Element>> mData;
     private ElementRepository mRepository;

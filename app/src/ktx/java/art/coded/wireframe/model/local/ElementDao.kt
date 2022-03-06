@@ -14,10 +14,10 @@ interface ElementDao {
     fun delete(element: Element?)
 
     @get:Query("SELECT * from element_table")
-    val all: LiveData<List<Element?>?>?
+    val all: LiveData<List<Element>>
 
     @get:Query("SELECT * from element_table LIMIT 1")
-    val any: Array<Element?>
+    val any: Array<Element>
 
     @Query("DELETE from element_table")
     fun deleteAll()

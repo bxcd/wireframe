@@ -6,6 +6,8 @@ import android.content.Context
 import android.util.Log
 import androidx.work.*
 
+private val LOG_TAG = DefaultWorker::class.java.simpleName
+
 class DefaultWorker(context: Context, workerParams: WorkerParameters) :
     Worker(context, workerParams) {
     override fun doWork(): Result {
@@ -31,7 +33,7 @@ class DefaultWorker(context: Context, workerParams: WorkerParameters) :
 
             // do task requiring guaranteed execution
             // (e.g. local/remote data sync, file i/o, image processing)
-            try { // placeholder
+            try { // custom
                 Thread.sleep(WorkConstants.DEFAULT_WORK_TIME_MILLIS)
             } catch (e: InterruptedException) {
                 Log.d(LOG_TAG, "failure" + e.message)
@@ -53,9 +55,5 @@ class DefaultWorker(context: Context, workerParams: WorkerParameters) :
             Log.d(LOG_TAG, "failure" + t.message)
             Result.failure()
         }
-    }
-
-    companion object {
-        val LOG_TAG = DefaultWorker::class.java.simpleName
     }
 }

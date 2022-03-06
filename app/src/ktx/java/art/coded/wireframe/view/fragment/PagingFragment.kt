@@ -15,13 +15,14 @@ import art.coded.wireframe.databinding.FragmentPagingBinding
 import art.coded.wireframe.model.entity.Element
 import art.coded.wireframe.model.entity.ElementComparator
 
+private val LOG_TAG = PagingFragment::class.java.simpleName
+
 class PagingFragment : Fragment() {
-    private var pagingViewModel: PagingViewModel? = null
     private var binding: FragmentPagingBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentPagingBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
         val activity: Activity? = activity
@@ -29,10 +30,10 @@ class PagingFragment : Fragment() {
         val pagingAdapter = PagingAdapter(ElementComparator(), requireActivity())
         recyclerView.adapter = pagingAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        pagingViewModel = ViewModelProvider(this).get(PagingViewModel::class.java)
-        pagingViewModel!!.loadData(requireActivity().application)
+        val pagingViewModel = ViewModelProvider(this).get(PagingViewModel::class.java)
+        pagingViewModel.loadData(requireActivity().application)
         //        List<Element> elements = pagingViewModel.elementList().getValue();
-        pagingViewModel!!.elementList()!!
+        pagingViewModel.elementList()
             .observe(requireActivity()) { pagedList: PagedList<Element> ->
                 pagingAdapter.submitList(
                     pagedList
@@ -44,9 +45,5 @@ class PagingFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-
-    companion object {
-        val LOG_TAG = PagingFragment::class.java.simpleName
     }
 }

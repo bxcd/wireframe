@@ -8,6 +8,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.work.*
 
+private val LOG_TAG = WorkViewModel::class.java.simpleName
+
 class WorkViewModel : ViewModel() {
     var mWorkManager: WorkManager? = null
     var workInfo: LiveData<List<WorkInfo>>? = null
@@ -39,9 +41,5 @@ class WorkViewModel : ViewModel() {
 
     fun cancelWork() {
         mWorkManager!!.cancelUniqueWork(WorkConstants.DEFAULT_WORK_NAME)
-    }
-
-    companion object {
-        private val LOG_TAG = WorkViewModel::class.java.simpleName
     }
 }

@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.view.Menu;
 
 import art.coded.wireframe.R;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -23,20 +22,17 @@ import art.coded.wireframe.databinding.ActivityMainBinding;
 // TODO: Implement custom View with accessibility hooks
 public class MainActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = Element.class.getSimpleName();
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainBinding binding;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fabMain.setOnClickListener(view -> {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
             Intent tabActivityIntent = new Intent(MainActivity.this, TabActivity.class);
             startActivity(tabActivityIntent);
         });
@@ -45,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_list, R.id.nav_work, R.id.nav_paging, R.id.nav_placeholder)
+                R.id.nav_home, R.id.nav_list, R.id.nav_work, R.id.nav_paging, R.id.nav_custom)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -60,12 +56,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
+        if (item.getItemId() == R.id.action_settings) {
                 Intent settingsActivityIntent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(settingsActivityIntent);
-                break;
-            default:
         }
         return super.onOptionsItemSelected(item);
     }

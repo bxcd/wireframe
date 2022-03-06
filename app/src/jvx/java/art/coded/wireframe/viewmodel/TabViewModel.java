@@ -9,8 +9,8 @@ public class TabViewModel extends ViewModel {
 
     private final String LOG_TAG = TabViewModel.class.getSimpleName();
 
-    private MutableLiveData<Integer> mIndex = new MutableLiveData<>();
-    private LiveData<String> mText = Transformations.map(mIndex, input -> "Hello world from section: " + input);
+    private final MutableLiveData<Integer> mIndex = new MutableLiveData<>();
+    private final LiveData<String> mText = Transformations.map(mIndex, input -> "Hello world from section: " + input);
 
     public void setIndex(int index) {
         mIndex.setValue(index);

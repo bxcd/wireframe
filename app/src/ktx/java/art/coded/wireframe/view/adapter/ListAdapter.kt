@@ -11,10 +11,12 @@ import androidx.core.app.ShareCompat
 import android.view.View
 import art.coded.wireframe.model.entity.Element
 
+private val LOG_TAG = ListAdapter::class.java.simpleName
+
 class ListAdapter(var mActivity: Activity?) :
     RecyclerView.Adapter<ListAdapter.ElementViewHolder>() {
     var mLayoutInflater: LayoutInflater
-    var mAllElements: List<Element?>? = null
+    var mAllElements: List<Element>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ElementViewHolder {
         val itemView = mLayoutInflater.inflate(R.layout.list_item, parent, false)
         return ElementViewHolder(itemView, mActivity)
@@ -31,12 +33,12 @@ class ListAdapter(var mActivity: Activity?) :
         return if (mAllElements == null) 0 else mAllElements!!.size
     }
 
-    fun setElements(elements: List<Element?>?) {
+    fun setElements(elements: List<Element>) {
         mAllElements = elements
         notifyDataSetChanged()
     }
 
-    fun getNameByPosition(position: Int): Element? {
+    fun getNameByPosition(position: Int): Element {
         return mAllElements!![position]
     }
 
@@ -48,7 +50,7 @@ class ListAdapter(var mActivity: Activity?) :
         init {
             mItemView = itemView.findViewById(R.id.textView)
             mImageButton = itemView.findViewById(R.id.list_button_share)
-            mImageButton.setOnClickListener { view: View? ->
+            mImageButton.setOnClickListener { view: View ->
                 ShareCompat.IntentBuilder
                     .from(activity!!)
                     .setType("text/plain")
@@ -56,10 +58,6 @@ class ListAdapter(var mActivity: Activity?) :
                     .startChooser()
             }
         }
-    }
-
-    companion object {
-        val LOG_TAG = ListAdapter::class.java.simpleName
     }
 
     init {

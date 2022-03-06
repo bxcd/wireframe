@@ -12,7 +12,7 @@ import androidx.work.WorkerParameters;
 
 public class DefaultWorker extends Worker {
 
-    static final String LOG_TAG = DefaultWorker.class.getSimpleName();
+    private static final String LOG_TAG = DefaultWorker.class.getSimpleName();
 
     public DefaultWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -45,7 +45,7 @@ public class DefaultWorker extends Worker {
 
             // do task requiring guaranteed execution
             // (e.g. local/remote data sync, file i/o, image processing)
-            try { // placeholder
+            try { // custom
                 Thread.sleep(WorkConstants.DEFAULT_WORK_TIME_MILLIS);
             } catch (InterruptedException e) { Log.d(LOG_TAG, "failure" + e.getMessage()); return Result.failure(); }
 

@@ -9,48 +9,46 @@ import androidx.paging.PagedList
 import androidx.paging.LivePagedListBuilder
 import art.coded.wireframe.model.entity.Element
 
-class ElementRepository(application: Application?) {
-    private val mElementDao: ElementDao?
+private val LOG_TAG = ElementRepository::class.java.simpleName
 
-    val allElements: LiveData<List<Element?>?>?
-    fun insert(element: Element?) { InsertAsyncTask(mElementDao).execute(element) }
-    fun delete(element: Element?) { DeleteAsyncTask(mElementDao).execute(element) }
+class ElementRepository(application: Application) {
+    private val mElementDao: ElementDao
+
+    val allElements: LiveData<List<Element>>
+    fun insert(element: Element) { InsertAsyncTask(mElementDao).execute(element) }
+    fun delete(element: Element) { DeleteAsyncTask(mElementDao).execute(element) }
     fun deleteAll() { DeleteAllAsyncTask(mElementDao).execute() }
     val pagedList: LiveData<PagedList<Element>>
         get() = LivePagedListBuilder(
-            mElementDao!!.pagingSource(), 15
+            mElementDao.pagingSource(), 15
         ).build()
 
-    private class InsertAsyncTask(var mAsyncTaskDao: ElementDao?) :
-        AsyncTask<Element?, Void?, Void?>() {
-        override fun doInBackground(vararg elements: Element?): Void? {
-            mAsyncTaskDao!!.insert(elements[0])
+    private class InsertAsyncTask(var mAsyncTaskDao: ElementDao) :
+        AsyncTask<Element, Void, Void>() {
+        override fun doInBackground(vararg elements: Element): Void? {
+            mAsyncTaskDao.insert(elements[0])
             return null
         }
     }
 
-    private class DeleteAsyncTask(var mAsyncTaskDao: ElementDao?) :
-        AsyncTask<Element?, Void?, Void?>() {
-        override fun doInBackground(vararg elements: Element?): Void? {
-            mAsyncTaskDao!!.delete(elements[0])
+    private class DeleteAsyncTask(var mAsyncTaskDao: ElementDao) :
+        AsyncTask<Element, Void, Void>() {
+        override fun doInBackground(vararg elements: Element): Void? {
+            mAsyncTaskDao.delete(elements[0])
             return null
         }
     }
 
-    private class DeleteAllAsyncTask(var mAsyncTaskDao: ElementDao?) :
-        AsyncTask<Void?, Void?, Void?>() {
-        override fun doInBackground(vararg voids: Void?): Void? {
-            mAsyncTaskDao!!.deleteAll()
+    private class DeleteAllAsyncTask(var mAsyncTaskDao: ElementDao) :
+        AsyncTask<Void, Void, Void>() {
+        override fun doInBackground(vararg voids: Void): Void? {
+            mAsyncTaskDao.deleteAll()
             return null
         }
-    }
-
-    companion object {
-        private val LOG_TAG = ElementRepository::class.java.simpleName
     }
 
     init {
-        val db: ElementRoomDatabase = ElementRoomDatabase.Companion.getInstance(application)
+        val db: ElementRoomDatabase = ElementRoomDatabase.getInstance(application)
         mElementDao = db.elementDao()
         allElements = mElementDao.all
     }

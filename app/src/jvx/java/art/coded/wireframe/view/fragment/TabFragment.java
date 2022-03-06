@@ -14,11 +14,11 @@ import art.coded.wireframe.databinding.FragmentTabBinding;
 import art.coded.wireframe.viewmodel.TabViewModel;
 
 /**
- * A placeholder fragment containing a simple view.
+ * A custom fragment containing a simple view.
  */
 public class TabFragment extends Fragment {
 
-    static final String LOG_TAG = TabFragment.class.getSimpleName();
+    private static final String LOG_TAG = TabFragment.class.getSimpleName();
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -51,7 +51,7 @@ public class TabFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.sectionLabel;
-        tabViewModel.getText().observe(getViewLifecycleOwner(), o -> textView.setText(o));
+        tabViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

@@ -6,7 +6,7 @@
     <string name="menu_list">List</string>
     <string name="menu_work">Work</string>
     <string name="menu_paging">Paging</string>
-    <string name="menu_placeholder">Placeholder</string>
+    <string name="menu_custom">Custom</string>
     <string name="title_activity_tab">Tab Activity</string>
     <string name="title_activity_detail">Detail Activity</string>
     <string name="tab_text_1">Tab 1</string>
@@ -42,4 +42,13 @@
     <string translatable="false" name="default_reply">reply</string>
     <string translatable="false" name="key_sync">sync</string>
     <string translatable="false" name="key_attachment">attachment</string>
+
+    <!-- Levels -->
+    <string name="level_off">Off</string>
+    <string name="level_low">Low</string>
+    <string name="level_medium">Medium</string>
+    <string name="level_high">High</string>
+    <string name="change">Change</string>
+    <string name="reset">Reset</string>
+
 </resources>

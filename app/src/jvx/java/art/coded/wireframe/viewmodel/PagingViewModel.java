@@ -11,6 +11,8 @@ import art.coded.wireframe.model.ElementRepository;
 
 public class PagingViewModel extends ViewModel {
 
+    private final String LOG_TAG = PagingViewModel.class.getSimpleName();
+
     ElementRepository mRepository;
 
     public void loadData(Application application) {

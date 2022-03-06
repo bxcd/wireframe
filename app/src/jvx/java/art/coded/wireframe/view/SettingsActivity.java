@@ -10,7 +10,7 @@ import art.coded.wireframe.model.entity.Element;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = Element.class.getSimpleName();
+    private static final String LOG_TAG = SettingsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -30,9 +30,9 @@
         tools:layout="@layout/fragment_paging" />
 
     <fragment
-        android:id="@+id/nav_placeholder"
-        android:name="art.coded.wireframe.view.fragment.PlaceholderFragment"
-        android:label="@string/menu_placeholder"
-        tools:layout="@layout/fragment_placeholder" />
+        android:id="@+id/nav_custom"
+        android:name="art.coded.wireframe.view.fragment.CustomFragment"
+        android:label="@string/menu_custom"
+        tools:layout="@layout/fragment_custom" />
 
 </navigation>

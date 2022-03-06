@@ -18,14 +18,12 @@ import art.coded.wireframe.databinding.ActivityTabBinding;
 
 public class TabActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = Element.class.getSimpleName();
-
-    private ActivityTabBinding binding;
+    private static final String LOG_TAG = TabActivity.class.getSimpleName();
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityTabBinding.inflate(getLayoutInflater());
+        ActivityTabBinding binding = ActivityTabBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         FloatingActionButton fab = binding.fabTab;
