@@ -25,11 +25,11 @@ class CustomFragment : Fragment() {
         val root: View = binding!!.root
         val textView = binding!!.textCustom
         val customView = binding!!.customView
-        customView.setOnClickListener(View.OnClickListener {
+        customView.setOnClickListener {
             val labelRes = customView.levelLabelRes
             val label = getString(labelRes)
             customViewModel.text.value = label
-        })
+        }
         customViewModel.text
             .observe(viewLifecycleOwner) { o: String? -> textView.text = o }
         return root

@@ -30,8 +30,9 @@ public class CustomFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textCustom;
-        binding.customView.setOnClickListener(view -> {
-            int labelRes = ((CustomView) view).getLevelLabelRes();
+        CustomView customView= binding.customView;
+        customView.setOnClickListener(view -> {
+            int labelRes = customView.getLevelLabelRes();
             String label = getString(labelRes);
             customViewModel.setText(label);
         });
