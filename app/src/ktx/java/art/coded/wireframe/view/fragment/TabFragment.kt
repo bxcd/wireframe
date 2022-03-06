@@ -9,6 +9,9 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import art.coded.wireframe.databinding.FragmentTabBinding
 
+private val LOG_TAG = TabFragment::class.java.simpleName
+private const val ARG_SECTION_NUMBER = "section_number"
+
 /**
  * A custom fragment containing a simple view.
  */
@@ -36,14 +39,7 @@ class TabFragment : Fragment() {
         return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
-
     companion object {
-        val LOG_TAG = TabFragment::class.java.simpleName
-        private const val ARG_SECTION_NUMBER = "section_number"
         fun newInstance(index: Int): TabFragment {
             val fragment = TabFragment()
             val bundle = Bundle()
@@ -51,5 +47,10 @@ class TabFragment : Fragment() {
             fragment.arguments = bundle
             return fragment
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

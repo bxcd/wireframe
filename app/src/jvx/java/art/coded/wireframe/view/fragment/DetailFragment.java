@@ -22,7 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class DetailFragment extends Fragment {
 
-    static final String LOG_TAG = DetailFragment.class.getSimpleName();
+    private static final String LOG_TAG = DetailFragment.class.getSimpleName();
 
     private DetailViewModel detailViewModel;
     private FragmentDetailBinding binding;

@@ -23,7 +23,7 @@ import art.coded.wireframe.viewmodel.PagingViewModel;
 
 public class PagingFragment extends Fragment {
 
-    static final String LOG_TAG = PagingFragment.class.getSimpleName();
+    private static final String LOG_TAG = PagingFragment.class.getSimpleName();
 
     private FragmentPagingBinding binding;
 

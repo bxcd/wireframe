@@ -15,6 +15,8 @@ import art.coded.wireframe.databinding.FragmentListBinding
 import art.coded.wireframe.model.entity.Element
 import art.coded.wireframe.view.adapter.ListAdapter
 
+private val LOG_TAG = ListFragment::class.java.simpleName
+
 class ListFragment : Fragment() {
     private var binding: FragmentListBinding? = null
     override fun onCreateView(
@@ -32,7 +34,7 @@ class ListFragment : Fragment() {
         listViewModel.loadData(requireActivity().application)
         listViewModel.data!!.observe(
             viewLifecycleOwner
-        ) { elementList: List<Element?>? -> listAdapter.setElements(elementList) }
+        ) { elementList: List<Element> -> listAdapter.setElements(elementList) }
         val touchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) {
@@ -57,9 +59,5 @@ class ListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-
-    companion object {
-        val LOG_TAG = ListFragment::class.java.simpleName
     }
 }

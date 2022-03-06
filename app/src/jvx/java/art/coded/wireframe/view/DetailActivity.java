@@ -10,7 +10,7 @@ import art.coded.wireframe.databinding.ActivityDetailBinding;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = Element.class.getSimpleName();
+    private static final String LOG_TAG = DetailActivity.class.getSimpleName();
 
     @Override protected void onCreate(Bundle savedInstanceState) {
 

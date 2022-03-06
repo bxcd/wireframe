@@ -18,7 +18,7 @@ import art.coded.wireframe.viewmodel.TabViewModel;
  */
 public class TabFragment extends Fragment {
 
-    static final String LOG_TAG = TabFragment.class.getSimpleName();
+    private static final String LOG_TAG = TabFragment.class.getSimpleName();
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 

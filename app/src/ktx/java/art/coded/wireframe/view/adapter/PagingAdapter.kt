@@ -13,6 +13,8 @@ import androidx.paging.PagedListAdapter
 import android.view.View
 import art.coded.wireframe.model.entity.Element
 
+private val LOG_TAG = PagingAdapter::class.java.simpleName
+
 class PagingAdapter(diffCallback: DiffUtil.ItemCallback<Element>, var mActivity: Activity) :
     PagedListAdapter<Element, PagingAdapter.ElementViewHolder>(diffCallback) {
     var mLayoutInflater: LayoutInflater

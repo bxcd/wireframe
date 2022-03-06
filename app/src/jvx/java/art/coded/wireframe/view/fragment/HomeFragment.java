@@ -16,7 +16,7 @@ import art.coded.wireframe.viewmodel.HomeViewModel;
 // TODO: Toggle app theme style by custom View
 public class HomeFragment extends Fragment {
 
-    static final String LOG_TAG = HomeFragment.class.getSimpleName();
+    private static final String LOG_TAG = HomeFragment.class.getSimpleName();
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;

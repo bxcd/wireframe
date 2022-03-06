@@ -22,7 +22,7 @@ import art.coded.wireframe.databinding.ActivityMainBinding;
 // TODO: Implement custom View with accessibility hooks
 public class MainActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = Element.class.getSimpleName();
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private AppBarConfiguration mAppBarConfiguration;
 

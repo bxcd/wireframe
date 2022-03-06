@@ -18,7 +18,7 @@ import art.coded.wireframe.viewmodel.WorkViewModel;
 
 public class WorkFragment extends Fragment {
 
-    static final String LOG_TAG = WorkFragment.class.getSimpleName();
+    private static final String LOG_TAG = WorkFragment.class.getSimpleName();
 
     private WorkViewModel mWorkViewModel;
     private FragmentWorkBinding binding;

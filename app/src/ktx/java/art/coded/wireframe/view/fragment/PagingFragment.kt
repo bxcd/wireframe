@@ -15,6 +15,8 @@ import art.coded.wireframe.databinding.FragmentPagingBinding
 import art.coded.wireframe.model.entity.Element
 import art.coded.wireframe.model.entity.ElementComparator
 
+private val LOG_TAG = PagingFragment::class.java.simpleName
+
 class PagingFragment : Fragment() {
     private var binding: FragmentPagingBinding? = null
     override fun onCreateView(
@@ -43,9 +45,5 @@ class PagingFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-
-    companion object {
-        val LOG_TAG = PagingFragment::class.java.simpleName
     }
 }

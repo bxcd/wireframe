@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import art.coded.wireframe.databinding.FragmentDetailBinding
 import art.coded.wireframe.model.entity.Element
 
+private val LOG_TAG = DetailFragment::class.java.simpleName
+
 class DetailFragment : Fragment() {
     private var binding: FragmentDetailBinding? = null
     override fun onCreateView(
@@ -60,9 +62,5 @@ class DetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-
-    companion object {
-        val LOG_TAG = DetailFragment::class.java.simpleName
     }
 }

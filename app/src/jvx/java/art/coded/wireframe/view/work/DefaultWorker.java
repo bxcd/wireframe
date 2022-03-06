@@ -12,7 +12,7 @@ import androidx.work.WorkerParameters;
 
 public class DefaultWorker extends Worker {
 
-    static final String LOG_TAG = DefaultWorker.class.getSimpleName();
+    private static final String LOG_TAG = DefaultWorker.class.getSimpleName();
 
     public DefaultWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);

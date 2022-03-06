@@ -11,6 +11,8 @@ import androidx.navigation.Navigation
 import art.coded.wireframe.databinding.ActivityMainBinding
 import art.coded.wireframe.model.entity.Element
 
+private val LOG_TAG = Element::class.java.simpleName
+
 class MainActivity : AppCompatActivity() {
     private var mAppBarConfiguration: AppBarConfiguration? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,9 +59,5 @@ class MainActivity : AppCompatActivity() {
         val navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main)
         return (NavigationUI.navigateUp(navController, mAppBarConfiguration!!)
                 || super.onSupportNavigateUp())
-    }
-
-    companion object {
-        private val LOG_TAG = Element::class.java.simpleName
     }
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 public class CustomViewModel extends ViewModel {
 
-    static final String LOG_TAG = CustomViewModel.class.getSimpleName();
+    private static final String LOG_TAG = CustomViewModel.class.getSimpleName();
 
     private final MutableLiveData<String> mText;
 

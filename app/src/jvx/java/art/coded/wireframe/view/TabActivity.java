@@ -18,8 +18,7 @@ import art.coded.wireframe.databinding.ActivityTabBinding;
 
 public class TabActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = Element.class.getSimpleName();
-
+    private static final String LOG_TAG = TabActivity.class.getSimpleName();
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

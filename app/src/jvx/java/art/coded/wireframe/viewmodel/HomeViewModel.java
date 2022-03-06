@@ -11,7 +11,7 @@ import art.coded.wireframe.R;
 
 public class HomeViewModel extends ViewModel {
 
-    static final String LOG_TAG = HomeViewModel.class.getSimpleName();
+    private static final String LOG_TAG = HomeViewModel.class.getSimpleName();
 
     private final MutableLiveData<String> mText;
 

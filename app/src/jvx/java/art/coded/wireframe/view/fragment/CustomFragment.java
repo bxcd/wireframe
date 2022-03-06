@@ -17,7 +17,7 @@ import art.coded.wireframe.viewmodel.CustomViewModel;
 
 public class CustomFragment extends Fragment {
 
-    static final String LOG_TAG = CustomFragment.class.getSimpleName();
+    private static final String LOG_TAG = CustomFragment.class.getSimpleName();
 
     private FragmentCustomBinding binding;
 

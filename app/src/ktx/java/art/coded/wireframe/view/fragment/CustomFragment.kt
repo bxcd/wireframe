@@ -9,6 +9,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import art.coded.wireframe.databinding.FragmentCustomBinding
 
+private val LOG_TAG = CustomFragment::class.java.simpleName
+
 class CustomFragment : Fragment() {
     private var binding: FragmentCustomBinding? = null
     override fun onCreateView(
@@ -29,9 +31,5 @@ class CustomFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-
-    companion object {
-        val LOG_TAG = CustomFragment::class.java.simpleName
     }
 }

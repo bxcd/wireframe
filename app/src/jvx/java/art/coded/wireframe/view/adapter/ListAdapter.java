@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ElementViewHolder> {
 
-    static final String LOG_TAG = ListAdapter.class.getSimpleName();
+    private static final String LOG_TAG = ListAdapter.class.getSimpleName();
 
     LayoutInflater mLayoutInflater;
     List<Element> mAllElements;

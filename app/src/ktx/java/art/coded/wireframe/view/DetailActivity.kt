@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import art.coded.wireframe.databinding.ActivityDetailBinding
 import art.coded.wireframe.model.entity.Element
 
+private val LOG_TAG = Element::class.java.simpleName
+
 class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,9 +17,5 @@ class DetailActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarDetail)
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    companion object {
-        private val LOG_TAG = Element::class.java.simpleName
     }
 }

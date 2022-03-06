@@ -8,8 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 
+private val LOG_TAG = HomeViewModel::class.java.simpleName
+
 class HomeViewModel : ViewModel() {
-    private val mText: MutableLiveData<String?>
+    private val mText = MutableLiveData<String>()
     fun loadData(context: Context) {
         val username = PreferenceManager.getDefaultSharedPreferences(context)
             .getString(
@@ -21,12 +23,4 @@ class HomeViewModel : ViewModel() {
 
     val text: LiveData<String?>
         get() = mText
-
-    companion object {
-        val LOG_TAG = HomeViewModel::class.java.simpleName
-    }
-
-    init {
-        mText = MutableLiveData()
-    }
 }

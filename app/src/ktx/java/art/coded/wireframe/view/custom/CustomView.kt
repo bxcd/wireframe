@@ -123,6 +123,6 @@ class CustomView @JvmOverloads constructor(
         y = (radius * sin(angle)).toFloat() + height / 2
     }
 
-    val levelLabelRes: int
+    val levelLabelRes: Int
         get() = level.label
 }

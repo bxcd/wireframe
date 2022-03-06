@@ -9,6 +9,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import art.coded.wireframe.databinding.FragmentHomeBinding
 
+private val LOG_TAG = HomeFragment::class.java.simpleName
+
 class HomeFragment : Fragment() {
     private var homeViewModel = HomeViewModel()
     private var binding: FragmentHomeBinding? = null
@@ -32,9 +34,5 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-
-    companion object {
-        val LOG_TAG = HomeFragment::class.java.simpleName
     }
 }

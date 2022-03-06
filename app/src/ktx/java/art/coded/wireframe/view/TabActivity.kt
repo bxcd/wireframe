@@ -8,6 +8,8 @@ import android.view.View
 import art.coded.wireframe.databinding.ActivityTabBinding
 import art.coded.wireframe.model.entity.Element
 
+private val LOG_TAG = Element::class.java.simpleName
+
 class TabActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +33,5 @@ class TabActivity : AppCompatActivity() {
         viewPager.adapter = tabPagerAdapter
         val tabs = binding.tabs
         tabs.setupWithViewPager(viewPager)
-    }
-
-    companion object {
-        private val LOG_TAG = Element::class.java.simpleName
     }
 }
