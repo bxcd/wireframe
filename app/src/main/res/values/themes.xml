@@ -14,6 +14,20 @@
         <!-- Customize your theme here. -->
     </style>
 
+<!--    <style name="Theme.wireframe.green" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
+<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+<!--        <item name="colorPrimaryVariant">@color/colorPrimaryLight</item>-->
+<!--        <item name="colorOnPrimary">@color/white</item>-->
+<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
+<!--        <item name="colorSecondary">@color/colorConversion</item>-->
+<!--        <item name="colorSecondaryVariant">@color/colorConversionLight</item>-->
+<!--        <item name="colorOnSecondary">@color/white</item>-->
+<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
+<!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--    </style>-->
+
     <style name="Theme.wireframe.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

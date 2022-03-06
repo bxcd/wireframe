@@ -15,8 +15,27 @@
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/customView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <art.coded.wireframe.view.custom.CustomView
+        android:id="@+id/customView"
+        style="@style/Widget.Theme.wireframe.MyView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="40dp"
+        app:exampleDimension="24sp"
+        app:exampleDrawable="@android:drawable/ic_menu_add"
+        app:exampleString="Hello, CustomView"
+        app:levelColor1="#992222"
+        app:levelColor2="#229922"
+        app:levelColor3="#222299"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_home" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
