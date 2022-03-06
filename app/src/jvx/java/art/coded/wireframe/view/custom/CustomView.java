@@ -94,6 +94,13 @@ public class CustomView extends View {
             }
         });
 
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CustomView);
+        levelLowColor = typedArray.getColor(R.styleable.CustomView_levelColor1, 0);
+        levelMediumColor =  typedArray.getColor(R.styleable.CustomView_levelColor2, 0);
+        levelHighColor =  typedArray.getColor(R.styleable.CustomView_levelColor3, 0);
+
+        typedArray.recycle();
+
         updateContentDescription();
     }
 
