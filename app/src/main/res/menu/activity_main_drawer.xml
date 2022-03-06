@@ -21,9 +21,9 @@
             android:icon="@android:drawable/ic_menu_more"
             android:title="@string/menu_paging" />
         <item
-            android:id="@+id/nav_placeholder"
+            android:id="@+id/nav_custom"
             android:icon="@android:drawable/ic_menu_help"
-            android:title="@string/menu_placeholder" />
+            android:title="@string/menu_custom" />
     </group>
 
 </menu>

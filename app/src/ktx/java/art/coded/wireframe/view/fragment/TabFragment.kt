@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import art.coded.wireframe.databinding.FragmentTabBinding
 
 /**
- * A placeholder fragment containing a simple view.
+ * A custom fragment containing a simple view.
  */
 class TabFragment : Fragment() {
-    private var tabViewModel: TabViewModel? = null
+    private var tabViewModel = TabViewModel()
     private var binding: FragmentTabBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,17 +22,17 @@ class TabFragment : Fragment() {
         if (arguments != null) {
             index = requireArguments().getInt(ARG_SECTION_NUMBER)
         }
-        tabViewModel!!.setIndex(index)
+        tabViewModel.setIndex(index)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTabBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
         val textView = binding!!.sectionLabel
-        tabViewModel!!.text.observe(viewLifecycleOwner) { o: String? -> textView.text = o }
+        tabViewModel.text.observe(viewLifecycleOwner) { o: String? -> textView.text = o }
         return root
     }
 

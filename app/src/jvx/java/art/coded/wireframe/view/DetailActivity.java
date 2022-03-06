@@ -12,12 +12,10 @@ public class DetailActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = Element.class.getSimpleName();
 
-    private ActivityDetailBinding binding;
-
     @Override protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        binding = ActivityDetailBinding.inflate(getLayoutInflater());
+        ActivityDetailBinding binding = ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Required for Up-nav with res-defined AppBar (along with Manifest meta-data definition)

@@ -31,7 +31,7 @@ class DefaultWorker(context: Context, workerParams: WorkerParameters) :
 
             // do task requiring guaranteed execution
             // (e.g. local/remote data sync, file i/o, image processing)
-            try { // placeholder
+            try { // custom
                 Thread.sleep(WorkConstants.DEFAULT_WORK_TIME_MILLIS)
             } catch (e: InterruptedException) {
                 Log.d(LOG_TAG, "failure" + e.message)

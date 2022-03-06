@@ -4,25 +4,24 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import art.coded.wireframe.viewmodel.PlaceholderViewModel
+import art.coded.wireframe.viewmodel.CustomViewModel
 import android.view.View
 import androidx.fragment.app.Fragment
-import art.coded.wireframe.databinding.FragmentPlaceholderBinding
+import art.coded.wireframe.databinding.FragmentCustomBinding
 
-class PlaceholderFragment : Fragment() {
-    private var placeholderViewModel: PlaceholderViewModel? = null
-    private var binding: FragmentPlaceholderBinding? = null
+class CustomFragment : Fragment() {
+    private var binding: FragmentCustomBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        placeholderViewModel = ViewModelProvider(this).get(
-            PlaceholderViewModel::class.java
+    ): View {
+        val customViewModel = ViewModelProvider(this).get(
+            CustomViewModel::class.java
         )
-        binding = FragmentPlaceholderBinding.inflate(inflater, container, false)
+        binding = FragmentCustomBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
-        val textView = binding!!.textPlaceholder
-        placeholderViewModel!!.text
+        val textView = binding!!.textCustom
+        customViewModel.text
             .observe(viewLifecycleOwner) { o: String? -> textView.text = o }
         return root
     }
@@ -33,6 +32,6 @@ class PlaceholderFragment : Fragment() {
     }
 
     companion object {
-        val LOG_TAG = PlaceholderFragment::class.java.simpleName
+        val LOG_TAG = CustomFragment::class.java.simpleName
     }
 }

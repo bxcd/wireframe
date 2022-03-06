@@ -16,12 +16,11 @@ import art.coded.wireframe.model.entity.Element
 import art.coded.wireframe.view.adapter.ListAdapter
 
 class ListFragment : Fragment() {
-    private var listViewModel: ListViewModel? = null
     private var binding: FragmentListBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentListBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
         val activity: Activity? = activity
@@ -29,9 +28,9 @@ class ListFragment : Fragment() {
         val listAdapter = ListAdapter(activity)
         recyclerView.adapter = listAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
-        listViewModel!!.loadData(requireActivity().application)
-        listViewModel!!.data!!.observe(
+        val listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        listViewModel.loadData(requireActivity().application)
+        listViewModel.data!!.observe(
             viewLifecycleOwner
         ) { elementList: List<Element?>? -> listAdapter.setElements(elementList) }
         val touchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
@@ -48,7 +47,7 @@ class ListFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val adapterPosition = viewHolder.adapterPosition
                 val element = listAdapter.getNameByPosition(adapterPosition)
-                listViewModel!!.removeData(element)
+                listViewModel.removeData(element)
             }
         })
         touchHelper.attachToRecyclerView(recyclerView)

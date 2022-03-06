@@ -117,7 +117,7 @@ public class CustomView extends View {
     protected void onDraw(Canvas canvas) {
 
         switch(mLevel) {
-            case OFF: mPaint.setColor(Color.GRAY); break;
+            case OFF: mPaint.setColor(Color.GRAY);break;
             case LOW: mPaint.setColor(levelLowColor); break;
             case MEDIUM: mPaint.setColor(levelMediumColor); break;
             default: mPaint.setColor(levelHighColor);
@@ -154,4 +154,6 @@ public class CustomView extends View {
         mPointPosition.x = ((float) (radius * Math.cos(angle))) + getWidth() / 2f;
         mPointPosition.y = ((float) (radius * Math.sin(angle))) + getHeight() / 2f;
     }
+
+//    public int getColorRes() { return mPaint.getColor(); }
 }

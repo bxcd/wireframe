@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class PlaceholderViewModel extends ViewModel {
+public class CustomViewModel extends ViewModel {
 
-    static final String LOG_TAG = PlaceholderViewModel.class.getSimpleName();
+    static final String LOG_TAG = CustomViewModel.class.getSimpleName();
 
-    private MutableLiveData<String> mText;
+    private final MutableLiveData<String> mText;
 
-    public PlaceholderViewModel() {
+    public CustomViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is placeholder fragment");
+        mText.setValue("This is custom view");
     }
 
     public LiveData<String> getText() {

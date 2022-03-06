@@ -25,7 +25,6 @@ public class PagingFragment extends Fragment {
 
     static final String LOG_TAG = PagingFragment.class.getSimpleName();
 
-    private PagingViewModel pagingViewModel;
     private FragmentPagingBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -42,7 +41,7 @@ public class PagingFragment extends Fragment {
         recyclerView.setAdapter(pagingAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 
-        pagingViewModel =
+        PagingViewModel pagingViewModel =
                 new ViewModelProvider(this).get(PagingViewModel.class);
         pagingViewModel.loadData(requireActivity().getApplication());
 //        List<Element> elements = pagingViewModel.elementList().getValue();

@@ -13,7 +13,7 @@ import kotlin.math.cos
 import kotlin.math.min
 import kotlin.math.sin
 
-private enum class Level(val label : Int) {
+enum class Level(val label : Int) {
     OFF(R.string.level_off),
     LOW(R.string.level_low),
     MEDIUM(R.string.level_medium),
@@ -94,7 +94,7 @@ class CustomView @JvmOverloads constructor(
             Level.LOW -> levelLowColor
             Level.MEDIUM -> levelMediumColor
             Level.HIGH -> levelHighColor
-        } as Int
+        }
 
         canvas.drawCircle((width / 2).toFloat(), (height / 2).toFloat(), radius, paint)
 
@@ -122,4 +122,7 @@ class CustomView @JvmOverloads constructor(
         x = (radius * cos(angle)).toFloat() + width / 2
         y = (radius * sin(angle)).toFloat() + height / 2
     }
+
+//    val colorRes: Int
+//        get() = paint.color
 }

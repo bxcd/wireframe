@@ -15,28 +15,27 @@ import art.coded.wireframe.databinding.FragmentDetailBinding
 import art.coded.wireframe.model.entity.Element
 
 class DetailFragment : Fragment() {
-    private var detailViewModel: DetailViewModel? = null
     private var binding: FragmentDetailBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
-        detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        detailViewModel!!.loadData(requireActivity().application)
+        val detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+        detailViewModel.loadData(requireActivity().application)
         val editText = binding!!.detailEditText
         val submitButton = binding!!.detailSubmitButton
         val clearButton = binding!!.detailClearButton
-        submitButton.setOnClickListener { submitView: View? ->
+        submitButton.setOnClickListener { submitView: View ->
             val elementText = editText.text
             if (elementText != null) {
                 val element = Element(elementText.toString(), hashCode())
-                detailViewModel!!.addData(element)
+                detailViewModel.addData(element)
                 editText.setText("")
             }
         }
-        clearButton.setOnClickListener { clearView: View? ->
+        clearButton.setOnClickListener { clearView: View ->
             val dialog = AlertDialog.Builder(requireActivity()).create()
             dialog.setMessage(getString(R.string.dialog_clear_message))
             dialog.setButton(
@@ -45,9 +44,9 @@ class DetailFragment : Fragment() {
             dialog.setButton(
                 AlertDialog.BUTTON_POSITIVE, getString(R.string.dialog_confirm)
             ) { dialogInterface: DialogInterface?, i: Int ->
-                detailViewModel!!.removeAllData()
+                detailViewModel.removeAllData()
                 Snackbar.make(
-                    clearView!!,
+                    clearView,
                     getString(R.string.clear_message),
                     Snackbar.LENGTH_LONG
                 ).show()

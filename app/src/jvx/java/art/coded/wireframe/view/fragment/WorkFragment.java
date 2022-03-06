@@ -20,7 +20,7 @@ public class WorkFragment extends Fragment {
 
     static final String LOG_TAG = WorkFragment.class.getSimpleName();
 
-    private WorkViewModel mViewModel;
+    private WorkViewModel mWorkViewModel;
     private FragmentWorkBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -32,13 +32,13 @@ public class WorkFragment extends Fragment {
         Button startButton = binding.workStartButton;
         Button cancelButton = binding.workCancelButton;
 
-        mViewModel = new ViewModelProvider(this).get(WorkViewModel.class);
-        mViewModel.loadData(requireActivity().getApplication());
+        mWorkViewModel = new ViewModelProvider(this).get(WorkViewModel.class);
+        mWorkViewModel.loadData(requireActivity().getApplication());
 
-        startButton.setOnClickListener(v -> mViewModel.applyWork());
-        cancelButton.setOnClickListener(v -> mViewModel.cancelWork());
+        startButton.setOnClickListener(v -> mWorkViewModel.applyWork());
+        cancelButton.setOnClickListener(v -> mWorkViewModel.cancelWork());
 
-        mViewModel.getWorkInfo().observe(getViewLifecycleOwner(), workInfoList -> {
+        mWorkViewModel.getWorkInfo().observe(getViewLifecycleOwner(), workInfoList -> {
 
             if (workInfoList == null || workInfoList.isEmpty()) return;
 

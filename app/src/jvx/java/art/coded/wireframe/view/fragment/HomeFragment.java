@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import art.coded.wireframe.R;
 import art.coded.wireframe.databinding.FragmentHomeBinding;
 import art.coded.wireframe.viewmodel.HomeViewModel;
 
@@ -27,7 +26,7 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-//        getActivity().setTheme(R.style.);
+
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
@@ -38,7 +37,8 @@ public class HomeFragment extends Fragment {
         super.onResume();
         final TextView textView = binding.textHome;
         homeViewModel.loadData(requireContext());
-        homeViewModel.getText().observe(getViewLifecycleOwner(), o -> textView.setText(o));
+        homeViewModel.getText().observe(
+                getViewLifecycleOwner(), textView::setText);
     }
 
     @Override public void onDestroyView() {

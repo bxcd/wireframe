@@ -10,12 +10,12 @@ import androidx.fragment.app.Fragment
 import art.coded.wireframe.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-    private var homeViewModel: HomeViewModel? = null
+    private var homeViewModel = HomeViewModel()
     private var binding: FragmentHomeBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -25,8 +25,8 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         val textView = binding!!.textHome
-        homeViewModel!!.loadData(requireContext())
-        homeViewModel!!.text.observe(viewLifecycleOwner) { o: String? -> textView.text = o }
+        homeViewModel.loadData(requireContext())
+        homeViewModel.text.observe(viewLifecycleOwner) { o: String? -> textView.text = o }
     }
 
     override fun onDestroyView() {

@@ -6,7 +6,7 @@
     <string name="menu_list">List</string>
     <string name="menu_work">Work</string>
     <string name="menu_paging">Paging</string>
-    <string name="menu_placeholder">Placeholder</string>
+    <string name="menu_custom">Custom</string>
     <string name="title_activity_tab">Tab Activity</string>
     <string name="title_activity_detail">Detail Activity</string>
     <string name="tab_text_1">Tab 1</string>

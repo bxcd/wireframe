@@ -13,7 +13,7 @@ public class HomeViewModel extends ViewModel {
 
     static final String LOG_TAG = HomeViewModel.class.getSimpleName();
 
-    private MutableLiveData<String> mText;
+    private final MutableLiveData<String> mText;
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();

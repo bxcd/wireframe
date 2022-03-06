@@ -34,7 +34,7 @@ class PagingAdapter(diffCallback: DiffUtil.ItemCallback<Element>, var mActivity:
         init {
             mItemView = itemView.findViewById(R.id.textView)
             mImageButton = itemView.findViewById(R.id.list_button_share)
-            mImageButton.setOnClickListener { view: View? ->
+            mImageButton.setOnClickListener { view: View ->
                 ShareCompat.IntentBuilder
                     .from(activity!!)
                     .setType("text/plain")
