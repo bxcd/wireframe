@@ -78,12 +78,11 @@ class CustomView @JvmOverloads constructor(
     }
 
     override fun performClick(): Boolean {
-        if (super.performClick()) return true
-
         level = level.next()
         contentDescription = resources.getString(level.label)
 
         invalidate()
+        super.performClick()
         return true
     }
 

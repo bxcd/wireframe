@@ -33,7 +33,6 @@ public class CustomFragment extends Fragment {
         binding.customView.setOnClickListener(view -> {
             int labelRes = ((CustomView) view).getLevelLabelRes();
             String label = getString(labelRes);
-            Log.d(LOG_TAG, label);
             customViewModel.setText(label);
         });
         customViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
