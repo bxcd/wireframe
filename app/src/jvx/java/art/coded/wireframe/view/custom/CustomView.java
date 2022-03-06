@@ -19,9 +19,11 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import art.coded.wireframe.R;
 
 /**
- * TODO: document your custom view class.
+ * 
  */
 public class CustomView extends View {
+
+    private static final String LOG_TAG = CustomView.class.getSimpleName();
 
     private enum Level {
         OFF { @Override public final int label() { return R.string.level_off; } },
@@ -105,11 +107,11 @@ public class CustomView extends View {
     }
 
     @Override public boolean performClick() {
-        if (super.performClick()) return true;
         mLevel = mLevel.next();
         updateContentDescription();
 
         invalidate();
+        super.performClick();
         return true;
     }
 
@@ -155,5 +157,5 @@ public class CustomView extends View {
         mPointPosition.y = ((float) (radius * Math.sin(angle))) + getHeight() / 2f;
     }
 
-//    public int getColorRes() { return mPaint.getColor(); }
+    public int getLevelLabelRes() { return mLevel.label(); }
 }

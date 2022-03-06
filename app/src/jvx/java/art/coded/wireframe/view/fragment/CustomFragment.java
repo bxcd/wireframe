@@ -1,6 +1,7 @@
 package art.coded.wireframe.view.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import art.coded.wireframe.databinding.FragmentCustomBinding;
+import art.coded.wireframe.view.custom.CustomView;
 import art.coded.wireframe.viewmodel.CustomViewModel;
 
 public class CustomFragment extends Fragment {
@@ -28,6 +30,12 @@ public class CustomFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textCustom;
+        binding.customView.setOnClickListener(view -> {
+            int labelRes = ((CustomView) view).getLevelLabelRes();
+            String label = getString(labelRes);
+            Log.d(LOG_TAG, label);
+            customViewModel.setText(label);
+        });
         customViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         return root;
