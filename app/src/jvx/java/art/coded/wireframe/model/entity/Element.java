@@ -14,7 +14,7 @@ public class Element {
     private final Integer mId;
     private final String mName;
 
-    public Element(@NonNull String name, Integer id) {
+    public Element(@NonNull String name, @NonNull Integer id) {
         mId = id;
         mName = name;
     }
