@@ -1,6 +1,6 @@
 package art.coded.wireframe.viewmodel;
 
-import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -15,8 +15,8 @@ public class PagingViewModel extends ViewModel {
 
     ElementRepository mRepository;
 
-    public void loadData(Application application) {
-        mRepository = new ElementRepository(application);
+    public void loadData(Context context) {
+        mRepository = new ElementRepository(context);
     }
 
     public void removeData(Element element) { mRepository.delete(element); }

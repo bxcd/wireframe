@@ -1,6 +1,7 @@
 package art.coded.wireframe.model;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
@@ -20,8 +21,8 @@ public class ElementRepository {
     private ElementDao mElementDao;
     private LiveData<List<Element>> mAllElements;
 
-    public ElementRepository(Application application) {
-        ElementRoomDatabase db = ElementRoomDatabase.getInstance(application);
+    public ElementRepository(Context context) {
+        ElementRoomDatabase db = ElementRoomDatabase.getInstance(context);
         mElementDao = db.elementDao();
         mAllElements = mElementDao.getAll();
     }
