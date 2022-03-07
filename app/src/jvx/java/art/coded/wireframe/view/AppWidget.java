@@ -8,18 +8,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import java.util.List;
 
 import art.coded.wireframe.R;
-import art.coded.wireframe.model.ElementRepository;
 import art.coded.wireframe.model.entity.Element;
 import art.coded.wireframe.model.local.ElementDao;
 import art.coded.wireframe.model.local.ElementRoomDatabase;
-import art.coded.wireframe.viewmodel.WidgetViewModel;
 
 /**
  * Provides a home screen interface that displays user data and offers navigation shortcuts.
