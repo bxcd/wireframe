@@ -111,7 +111,7 @@ public class AppWidget extends AppWidgetProvider {
         }
         @Override public void onDestroy() {}
         @Override public int getCount() {
-            return mElementList.size();
+            return mElementList != null ? mElementList.size() : 0;
         }
         @Override public RemoteViews getLoadingView() {
             return null;
