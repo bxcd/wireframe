@@ -8,7 +8,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -16,7 +15,8 @@ import java.util.List;
 
 import art.coded.wireframe.R;
 import art.coded.wireframe.model.entity.Element;
-import art.coded.wireframe.viewmodel.WidgetViewModel;
+import art.coded.wireframe.model.local.ElementDao;
+import art.coded.wireframe.model.local.ElementRoomDatabase;
 
 /**
  * Provides a home screen interface that displays user data and offers navigation shortcuts.
@@ -71,16 +71,11 @@ public class AppWidget extends AppWidgetProvider {
 
         Context mContext;
         List<Element> mElementList;
-        WidgetViewModel mWidgetViewModel;
+        ElementDao mElementDao;
 
         AppWidgetRemoteViewsFactory(Context context) {
             mContext = context;
-            mWidgetViewModel = new WidgetViewModel();
-            mWidgetViewModel.loadData(context);
-            mElementList = mWidgetViewModel.getData().getValue();
-            if (mElementList != null) for (Element e : mElementList) {
-                Log.d(LOG_TAG, e.getName());
-            }
+            mElementDao = ElementRoomDatabase.getInstance(mContext).elementDao();
         }
 
         /**
@@ -89,7 +84,7 @@ public class AppWidget extends AppWidgetProvider {
          */
         @Override public void onDataSetChanged() {
             long token = Binder.clearCallingIdentity();
-            mElementList = mWidgetViewModel.getData().getValue();
+            mElementList = mElementDao.getAllUnwrapped();
             refresh(mContext);
             Binder.restoreCallingIdentity(token);
         }
@@ -111,7 +106,7 @@ public class AppWidget extends AppWidgetProvider {
         }
         @Override public void onDestroy() {}
         @Override public int getCount() {
-            return mElementList.size();
+            return mElementList != null ? mElementList.size() : 0;
         }
         @Override public RemoteViews getLoadingView() {
             return null;

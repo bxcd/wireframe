@@ -17,6 +17,7 @@ import art.coded.wireframe.model.entity.Element;
     @Insert(onConflict = OnConflictStrategy.REPLACE) void insert(Element element);
     @Delete void delete(Element element);
     @Query("SELECT * from element_table") LiveData<List<Element>> getAll();
+    @Query("SELECT * from element_table") List<Element> getAllUnwrapped();
     @Query("SELECT * from element_table LIMIT 1") Element[] getAny();
     @Query("DELETE from element_table") void deleteAll();
 
