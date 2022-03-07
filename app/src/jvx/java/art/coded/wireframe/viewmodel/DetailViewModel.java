@@ -1,6 +1,6 @@
 package art.coded.wireframe.viewmodel;
 
-import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -17,8 +17,8 @@ public class DetailViewModel extends ViewModel {
     private LiveData<List<Element>> mData;
     private ElementRepository mRepository;
 
-    public void loadData(Application application) {
-        mRepository = new ElementRepository(application);
+    public void loadData(Context context) {
+        mRepository = new ElementRepository(context);
         mData = mRepository.getAllElements();
     }
 

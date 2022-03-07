@@ -1,6 +1,5 @@
 package art.coded.wireframe.view;
 
-import android.app.Application;
 import android.app.ListActivity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -9,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -22,6 +22,8 @@ import art.coded.wireframe.viewmodel.WidgetViewModel;
  * Provides a home screen interface that displays user data and offers navigation shortcuts.
  */
 public class AppWidget extends AppWidgetProvider {
+
+    private static final String LOG_TAG = AppWidget.class.getSimpleName();
 
     /**
      * Retrieves and sets {@link PendingIntent} on {@link RemoteViews} of a single {@link AppWidget}.
@@ -67,15 +69,18 @@ public class AppWidget extends AppWidgetProvider {
     public static class AppWidgetRemoteViewsFactory
             implements RemoteViewsService.RemoteViewsFactory {
 
-        Application mApplication;
+        Context mContext;
         List<Element> mElementList;
         WidgetViewModel mWidgetViewModel;
-        
-        AppWidgetRemoteViewsFactory(Application application) {
-            mApplication = application;
+
+        AppWidgetRemoteViewsFactory(Context context) {
+            mContext = context;
             mWidgetViewModel = new WidgetViewModel();
-            mWidgetViewModel.loadData(application);
+            mWidgetViewModel.loadData(context);
             mElementList = mWidgetViewModel.getData().getValue();
+            if (mElementList != null) for (Element e : mElementList) {
+                Log.d(LOG_TAG, e.getName());
+            }
         }
 
         /**
@@ -85,6 +90,7 @@ public class AppWidget extends AppWidgetProvider {
         @Override public void onDataSetChanged() {
             long token = Binder.clearCallingIdentity();
             mElementList = mWidgetViewModel.getData().getValue();
+            refresh(mContext);
             Binder.restoreCallingIdentity(token);
         }
 
@@ -95,7 +101,7 @@ public class AppWidget extends AppWidgetProvider {
 
             String name = mElementList.get(position).getName();
 
-            RemoteViews remoteViews = new RemoteViews(mApplication.getPackageName(), R.layout.item_widget);
+            RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.item_widget);
             remoteViews.setTextViewText(R.id.widget_item_name, name);
 
             return remoteViews;
