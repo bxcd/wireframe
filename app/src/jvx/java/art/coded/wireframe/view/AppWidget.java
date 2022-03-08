@@ -63,6 +63,7 @@ public class AppWidget extends AppWidgetProvider {
         }
     }
 
+    // TODO: Address refresh-notify call pattern
     /**
      * Builds {@link RemoteViews} for populating remote collections.
      */

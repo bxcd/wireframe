@@ -107,6 +107,7 @@ class AppWidget : AppWidgetProvider() {
         }
     }
 
+    // TODO: Address refresh-notify call pattern
     companion object {
 
         /**
