@@ -1,7 +1,7 @@
 package art.coded.wireframe.viewmodel
 
 import androidx.lifecycle.LiveData
-import android.app.Application
+import android.content.Context
 import art.coded.wireframe.model.ElementRepository
 import androidx.lifecycle.ViewModel
 import art.coded.wireframe.model.entity.Element
@@ -12,8 +12,8 @@ class DetailViewModel : ViewModel() {
     var data : LiveData<List<Element>>? = null
         private set
     private var mRepository: ElementRepository? = null
-    fun loadData(application: Application) {
-        mRepository = ElementRepository(application)
+    fun loadData(context: Context) {
+        mRepository = ElementRepository(context)
         data = mRepository!!.allElements
     }
 

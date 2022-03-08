@@ -1,6 +1,5 @@
 package art.coded.wireframe.model;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
 

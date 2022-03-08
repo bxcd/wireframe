@@ -31,7 +31,7 @@ class ListFragment : Fragment() {
         recyclerView.adapter = listAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
-        listViewModel.loadData(requireActivity().application)
+        listViewModel.loadData(requireContext())
         listViewModel.data!!.observe(
             viewLifecycleOwner
         ) { elementList: List<Element> -> listAdapter.setElements(elementList) }

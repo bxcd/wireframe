@@ -33,7 +33,7 @@ public class WorkFragment extends Fragment {
         Button cancelButton = binding.workCancelButton;
 
         mWorkViewModel = new ViewModelProvider(this).get(WorkViewModel.class);
-        mWorkViewModel.loadData(requireActivity().getApplication());
+        mWorkViewModel.loadData(requireContext());
 
         startButton.setOnClickListener(v -> mWorkViewModel.applyWork());
         cancelButton.setOnClickListener(v -> mWorkViewModel.cancelWork());

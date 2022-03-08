@@ -34,7 +34,7 @@ public class DetailFragment extends Fragment {
         View root = binding.getRoot();
 
         detailViewModel = new ViewModelProvider(this).get(DetailViewModel.class);
-        detailViewModel.loadData(requireActivity().getApplication());
+        detailViewModel.loadData(requireContext());
         EditText editText = binding.detailEditText;
         Button submitButton = binding.detailSubmitButton;
         Button clearButton = binding.detailClearButton;

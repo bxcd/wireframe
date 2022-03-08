@@ -40,7 +40,7 @@ public class ListFragment extends Fragment {
 
         listViewModel =
                 new ViewModelProvider(this).get(ListViewModel.class);
-        listViewModel.loadData(requireActivity().getApplication());
+        listViewModel.loadData(requireContext());
         listViewModel.getData().observe(getViewLifecycleOwner(),
                 listAdapter::setElements);
 

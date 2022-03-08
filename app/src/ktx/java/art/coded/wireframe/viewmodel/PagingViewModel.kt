@@ -1,7 +1,7 @@
 package art.coded.wireframe.viewmodel
 
 import androidx.lifecycle.LiveData
-import android.app.Application
+import android.content.Context
 import androidx.paging.PagedList
 import art.coded.wireframe.model.ElementRepository
 import androidx.lifecycle.ViewModel
@@ -11,8 +11,8 @@ private val LOG_TAG = PagingViewModel::class.java.simpleName
 
 class PagingViewModel : ViewModel() {
     var mRepository: ElementRepository? = null
-    fun loadData(application: Application) {
-        mRepository = ElementRepository(application)
+    fun loadData(context: Context) {
+        mRepository = ElementRepository(context)
     }
 
     fun removeData(element: Element) {

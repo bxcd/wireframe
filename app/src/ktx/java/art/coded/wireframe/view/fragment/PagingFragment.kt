@@ -31,7 +31,7 @@ class PagingFragment : Fragment() {
         recyclerView.adapter = pagingAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val pagingViewModel = ViewModelProvider(this).get(PagingViewModel::class.java)
-        pagingViewModel.loadData(requireActivity().application)
+        pagingViewModel.loadData(requireContext())
         //        List<Element> elements = pagingViewModel.elementList().getValue();
         pagingViewModel.elementList()
             .observe(requireActivity()) { pagedList: PagedList<Element> ->

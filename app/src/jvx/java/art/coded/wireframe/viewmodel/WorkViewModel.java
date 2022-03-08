@@ -1,6 +1,6 @@
 package art.coded.wireframe.viewmodel;
 
-import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -24,9 +24,9 @@ public class WorkViewModel extends ViewModel {
     WorkManager mWorkManager;
     LiveData<List<WorkInfo>> mWorkInfo;
 
-    public void loadData(Application application) {
+    public void loadData(Context context) {
 
-        mWorkManager = WorkManager.getInstance(application);
+        mWorkManager = WorkManager.getInstance(context);
         mWorkInfo = mWorkManager.getWorkInfosByTagLiveData(WorkConstants.DEFAULT_WORK_TAG);
     }
 

@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import art.coded.wireframe.model.local.ElementDao
 import art.coded.wireframe.model.local.ElementRoomDatabase
 import android.os.AsyncTask
-import android.app.Application
+import android.content.Context
 import androidx.paging.PagedList
 import androidx.paging.LivePagedListBuilder
 import art.coded.wireframe.model.entity.Element
 
 private val LOG_TAG = ElementRepository::class.java.simpleName
 
-class ElementRepository(application: Application) {
+class ElementRepository(context: Context) {
     private val mElementDao: ElementDao
 
     val allElements: LiveData<List<Element>>
@@ -48,7 +48,7 @@ class ElementRepository(application: Application) {
     }
 
     init {
-        val db: ElementRoomDatabase = ElementRoomDatabase.getInstance(application)
+        val db: ElementRoomDatabase = ElementRoomDatabase.getInstance(context)
         mElementDao = db.elementDao()
         allElements = mElementDao.all
     }

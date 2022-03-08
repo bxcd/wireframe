@@ -25,7 +25,7 @@ class WorkFragment : Fragment() {
         val startButton = binding!!.workStartButton
         val cancelButton = binding!!.workCancelButton
         val workViewModel = ViewModelProvider(this).get(WorkViewModel::class.java)
-        workViewModel.loadData(requireActivity().application)
+        workViewModel.loadData(requireContext())
         startButton.setOnClickListener { v: View -> workViewModel.applyWork() }
         cancelButton.setOnClickListener { v: View -> workViewModel.cancelWork() }
         workViewModel.workInfo!!.observe(viewLifecycleOwner) { workInfoList: List<WorkInfo?>? ->

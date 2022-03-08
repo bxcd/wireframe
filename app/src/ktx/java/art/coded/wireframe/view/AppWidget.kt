@@ -41,7 +41,7 @@ class AppWidget : AppWidgetProvider() {
      */
     class AppWidgetRemoteViewsService : RemoteViewsService() {
         override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory {
-            return AppWidgetRemoteViewsFactory(getApplication())
+            return AppWidgetRemoteViewsFactory(getApplicationContext())
         }
     }
 

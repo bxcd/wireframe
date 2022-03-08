@@ -25,7 +25,7 @@ class DetailFragment : Fragment() {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
         val detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        detailViewModel.loadData(requireActivity().application)
+        detailViewModel.loadData(requireContext())
         val editText = binding!!.detailEditText
         val submitButton = binding!!.detailSubmitButton
         val clearButton = binding!!.detailClearButton

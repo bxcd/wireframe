@@ -43,7 +43,7 @@ public class PagingFragment extends Fragment {
 
         PagingViewModel pagingViewModel =
                 new ViewModelProvider(this).get(PagingViewModel.class);
-        pagingViewModel.loadData(requireActivity().getApplication());
+        pagingViewModel.loadData(requireContext());
 //        List<Element> elements = pagingViewModel.elementList().getValue();
 
         pagingViewModel.elementList().observe(requireActivity(), pagingAdapter::submitList);

@@ -60,7 +60,7 @@ public class AppWidget extends AppWidgetProvider {
      */
     public static class AppWidgetRemoteViewsService extends RemoteViewsService {
         @Override public RemoteViewsFactory onGetViewFactory(Intent intent) {
-            return new AppWidgetRemoteViewsFactory(getApplication());
+            return new AppWidgetRemoteViewsFactory(getApplicationContext());
         }
     }
 

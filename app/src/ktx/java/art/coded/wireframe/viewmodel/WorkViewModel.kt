@@ -1,7 +1,7 @@
 package art.coded.wireframe.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
-import android.app.Application
 import art.coded.wireframe.view.work.WorkConstants
 import art.coded.wireframe.view.work.DefaultWorker
 import android.util.Log
@@ -13,8 +13,8 @@ private val LOG_TAG = WorkViewModel::class.java.simpleName
 class WorkViewModel : ViewModel() {
     var mWorkManager: WorkManager? = null
     var workInfo: LiveData<List<WorkInfo>>? = null
-    fun loadData(application: Application?) {
-        mWorkManager = WorkManager.getInstance(application!!)
+    fun loadData(context: Context?) {
+        mWorkManager = WorkManager.getInstance(context!!)
         workInfo = mWorkManager!!.getWorkInfosByTagLiveData(WorkConstants.DEFAULT_WORK_TAG)
     }
 
