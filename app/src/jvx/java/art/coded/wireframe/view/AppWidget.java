@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -63,6 +64,7 @@ public class AppWidget extends AppWidgetProvider {
         }
     }
 
+    // TODO: Address refresh-notify call pattern
     /**
      * Builds {@link RemoteViews} for populating remote collections.
      */
@@ -85,6 +87,11 @@ public class AppWidget extends AppWidgetProvider {
         @Override public void onDataSetChanged() {
             long token = Binder.clearCallingIdentity();
             mElementList = mElementDao.getAllUnwrapped();
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException("AppWidget is unable to refresh", e);
+            }
             refresh(mContext);
             Binder.restoreCallingIdentity(token);
         }
