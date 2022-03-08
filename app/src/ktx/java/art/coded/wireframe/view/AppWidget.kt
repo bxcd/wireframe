@@ -62,6 +62,11 @@ class AppWidget : AppWidgetProvider() {
         override fun onDataSetChanged() {
             val token: Long = Binder.clearCallingIdentity()
             mElementList = mElementDao.allUnwrapped
+            try {
+                Thread.sleep(10000)
+            } catch (e: InterruptedException) {
+                throw RuntimeException("AppWidget is unable to refresh", e)
+            }
             refresh(mContext)
             Binder.restoreCallingIdentity(token)
         }
