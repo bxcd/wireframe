@@ -14,6 +14,9 @@ interface ElementDao {
     fun delete(element: Element?)
 
     @get:Query("SELECT * from element_table")
+    val allUnwrapped: List<Element>
+
+    @get:Query("SELECT * from element_table")
     val all: LiveData<List<Element>>
 
     @get:Query("SELECT * from element_table LIMIT 1")
