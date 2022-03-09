@@ -5,7 +5,9 @@ import android.content.Context
 import androidx.paging.PagedList
 import art.coded.wireframe.model.ElementRepository
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import art.coded.wireframe.model.entity.Element
+import kotlinx.coroutines.launch
 
 private val LOG_TAG = PagingViewModel::class.java.simpleName
 
@@ -16,7 +18,9 @@ class PagingViewModel : ViewModel() {
     }
 
     fun removeData(element: Element) {
-        mRepository!!.delete(element)
+        viewModelScope.launch {
+            mRepository!!.delete(element)
+        }
     }
 
     fun elementList(): LiveData<PagedList<Element>> {

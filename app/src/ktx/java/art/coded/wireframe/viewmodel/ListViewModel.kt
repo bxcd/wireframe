@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import android.content.Context
 import art.coded.wireframe.model.ElementRepository
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import art.coded.wireframe.model.entity.Element
+import kotlinx.coroutines.launch
 
 private val LOG_TAG = ListViewModel::class.java.simpleName
 
@@ -14,11 +16,15 @@ class ListViewModel : ViewModel() {
         private set
 
     fun loadData(context: Context) {
-        mRepository = ElementRepository(context)
-        data = mRepository!!.allElements
+        viewModelScope.launch {
+            mRepository = ElementRepository(context)
+            data = mRepository!!.allElements
+        }
     }
 
     fun removeData(element: Element) {
-        mRepository!!.delete(element)
+        viewModelScope.launch {
+            mRepository!!.delete(element)
+        }
     }
 }

@@ -3,51 +3,26 @@ package art.coded.wireframe.model
 import androidx.lifecycle.LiveData
 import art.coded.wireframe.model.local.ElementDao
 import art.coded.wireframe.model.local.ElementRoomDatabase
-import android.os.AsyncTask
 import android.content.Context
 import androidx.paging.PagedList
 import androidx.paging.LivePagedListBuilder
 import art.coded.wireframe.model.entity.Element
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 private val LOG_TAG = ElementRepository::class.java.simpleName
-
-// TODO: Implement coroutines
 
 class ElementRepository(context: Context) {
     private val mElementDao: ElementDao
 
     val allElements: LiveData<List<Element>>
-    fun insert(element: Element) { InsertAsyncTask(mElementDao).execute(element) }
-    fun delete(element: Element) { DeleteAsyncTask(mElementDao).execute(element) }
-    fun deleteAll() { DeleteAllAsyncTask(mElementDao).execute() }
+    suspend fun insert(element: Element) { withContext(Dispatchers.IO) { mElementDao.insert(element) } }
+    suspend fun delete(element: Element) { withContext(Dispatchers.IO) { mElementDao.delete(element) } }
+    suspend fun deleteAll() { withContext(Dispatchers.IO) { mElementDao.deleteAll() } }
     val pagedList: LiveData<PagedList<Element>>
         get() = LivePagedListBuilder(
             mElementDao.pagingSource(), 15
         ).build()
-
-    private class InsertAsyncTask(var mAsyncTaskDao: ElementDao) :
-        AsyncTask<Element, Void, Void>() {
-        override fun doInBackground(vararg elements: Element): Void? {
-            mAsyncTaskDao.insert(elements[0])
-            return null
-        }
-    }
-
-    private class DeleteAsyncTask(var mAsyncTaskDao: ElementDao) :
-        AsyncTask<Element, Void, Void>() {
-        override fun doInBackground(vararg elements: Element): Void? {
-            mAsyncTaskDao.delete(elements[0])
-            return null
-        }
-    }
-
-    private class DeleteAllAsyncTask(var mAsyncTaskDao: ElementDao) :
-        AsyncTask<Void, Void, Void>() {
-        override fun doInBackground(vararg voids: Void): Void? {
-            mAsyncTaskDao.deleteAll()
-            return null
-        }
-    }
 
     init {
         val db: ElementRoomDatabase = ElementRoomDatabase.getInstance(context)
