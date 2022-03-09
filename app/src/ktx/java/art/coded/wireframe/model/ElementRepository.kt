@@ -11,6 +11,8 @@ import art.coded.wireframe.model.entity.Element
 
 private val LOG_TAG = ElementRepository::class.java.simpleName
 
+// TODO: Implement coroutines
+
 class ElementRepository(context: Context) {
     private val mElementDao: ElementDao
 
