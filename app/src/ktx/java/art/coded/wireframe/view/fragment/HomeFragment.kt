@@ -11,6 +11,8 @@ import art.coded.wireframe.databinding.FragmentHomeBinding
 
 private val LOG_TAG = HomeFragment::class.java.simpleName
 
+// TODO: Update ViewModel signature replacing context with repository
+//  and update instantiation and usage within Fragments
 class HomeFragment : Fragment() {
     private var homeViewModel = HomeViewModel()
     private var binding: FragmentHomeBinding? = null
