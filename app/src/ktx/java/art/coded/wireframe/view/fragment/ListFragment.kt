@@ -30,6 +30,7 @@ class ListFragment : Fragment() {
         val listAdapter = ListAdapter(activity)
         recyclerView.adapter = listAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
+        listAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         val listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         listViewModel.loadData(requireContext())
         listViewModel.data!!.observe(

@@ -37,6 +37,7 @@ public class ListFragment extends Fragment {
         ListAdapter listAdapter = new ListAdapter(activity);
         recyclerView.setAdapter(listAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+        listAdapter.setStateRestorationPolicy(RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY);
 
         listViewModel =
                 new ViewModelProvider(this).get(ListViewModel.class);
