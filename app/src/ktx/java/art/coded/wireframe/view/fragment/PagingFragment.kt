@@ -11,6 +11,7 @@ import art.coded.wireframe.view.adapter.PagingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import art.coded.wireframe.databinding.FragmentPagingBinding
 import art.coded.wireframe.model.entity.Element
 import art.coded.wireframe.model.entity.ElementComparator
@@ -30,6 +31,7 @@ class PagingFragment : Fragment() {
         val pagingAdapter = PagingAdapter(ElementComparator(), requireActivity())
         recyclerView.adapter = pagingAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
+        pagingAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY;
         val pagingViewModel = ViewModelProvider(this).get(PagingViewModel::class.java)
         pagingViewModel.loadData(requireContext())
         //        List<Element> elements = pagingViewModel.elementList().getValue();

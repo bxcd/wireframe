@@ -40,6 +40,7 @@ public class PagingFragment extends Fragment {
         PagingAdapter pagingAdapter = new PagingAdapter(new ElementComparator(), requireActivity());
         recyclerView.setAdapter(pagingAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+        pagingAdapter.setStateRestorationPolicy(RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY);
 
         PagingViewModel pagingViewModel =
                 new ViewModelProvider(this).get(PagingViewModel.class);
