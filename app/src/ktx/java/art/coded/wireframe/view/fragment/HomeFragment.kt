@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import art.coded.wireframe.viewmodel.HomeViewModel
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
+import art.coded.wireframe.R
 import art.coded.wireframe.databinding.FragmentHomeBinding
 
 private val LOG_TAG = HomeFragment::class.java.simpleName
@@ -30,7 +32,10 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         val textView = binding!!.textHome
-        homeViewModel.loadData(requireContext())
+        val sp = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val key = requireContext().getString(R.string.key_username)
+        val default = requireContext().getString(R.string.default_username)
+        homeViewModel.loadData(sp, key, default)
         homeViewModel.text.observe(viewLifecycleOwner) { o: String? -> textView.text = o }
     }
 

@@ -1,6 +1,7 @@
 package art.coded.wireframe.view.fragment
 
 import android.app.Activity
+import android.app.Application
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,8 +13,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import android.view.View
 import androidx.fragment.app.Fragment
 import art.coded.wireframe.databinding.FragmentListBinding
+import art.coded.wireframe.model.ElementRepository
 import art.coded.wireframe.model.entity.Element
+import art.coded.wireframe.model.local.ElementRoomDatabase
 import art.coded.wireframe.view.adapter.ListAdapter
+import art.coded.wireframe.viewmodel.DetailViewModel
 
 private val LOG_TAG = ListFragment::class.java.simpleName
 
@@ -31,8 +35,11 @@ class ListFragment : Fragment() {
         recyclerView.adapter = listAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
         listAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+
+        val detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+        val db: ElementRoomDatabase = ElementRoomDatabase.getInstance(requireContext().applicationContext)
         val listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
-        listViewModel.loadData(requireContext())
+        listViewModel.loadData(ElementRepository(db.elementDao()))
         listViewModel.data!!.observe(
             viewLifecycleOwner
         ) { elementList: List<Element> -> listAdapter.setElements(elementList) }

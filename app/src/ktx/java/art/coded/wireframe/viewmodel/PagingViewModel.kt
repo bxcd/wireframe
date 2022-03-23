@@ -13,8 +13,8 @@ private val LOG_TAG = PagingViewModel::class.java.simpleName
 
 class PagingViewModel : ViewModel() {
     lateinit var mRepository: ElementRepository
-    fun loadData(context: Context) {
-        mRepository = ElementRepository(context)
+    fun loadData(repository: ElementRepository) {
+        mRepository = repository
     }
 
     fun removeData(element: Element) {

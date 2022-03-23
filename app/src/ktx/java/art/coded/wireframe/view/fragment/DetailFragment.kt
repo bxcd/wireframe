@@ -1,5 +1,6 @@
 package art.coded.wireframe.view.fragment
 
+import android.app.Application
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import art.coded.wireframe.R
@@ -12,7 +13,9 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import art.coded.wireframe.databinding.FragmentDetailBinding
+import art.coded.wireframe.model.ElementRepository
 import art.coded.wireframe.model.entity.Element
+import art.coded.wireframe.model.local.ElementRoomDatabase
 
 private val LOG_TAG = DetailFragment::class.java.simpleName
 
@@ -25,7 +28,8 @@ class DetailFragment : Fragment() {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
         val detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        detailViewModel.loadData(requireContext())
+        val db: ElementRoomDatabase = ElementRoomDatabase.getInstance(requireContext().applicationContext)
+        detailViewModel.loadData(ElementRepository(db.elementDao()))
         val editText = binding!!.detailEditText
         val submitButton = binding!!.detailSubmitButton
         val clearButton = binding!!.detailClearButton

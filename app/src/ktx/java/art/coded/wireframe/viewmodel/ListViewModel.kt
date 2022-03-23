@@ -15,9 +15,9 @@ class ListViewModel : ViewModel() {
     lateinit var data: LiveData<List<Element>>
         private set
 
-    fun loadData(context: Context) {
+    fun loadData(repository: ElementRepository) {
+        mRepository = repository
         viewModelScope.launch {
-            mRepository = ElementRepository(context)
             data = mRepository.allElements
         }
     }

@@ -14,9 +14,9 @@ class DetailViewModel : ViewModel() {
     lateinit var data : LiveData<List<Element>>
         private set
     private lateinit var mRepository: ElementRepository
-    fun loadData(context: Context) {
+    fun loadData(repository: ElementRepository) {
         viewModelScope.launch {
-            mRepository = ElementRepository(context)
+            mRepository = repository
             data = mRepository.allElements
         }
     }
