@@ -1,6 +1,5 @@
 package art.coded.wireframe.view.fragment
 
-import android.app.Application
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import art.coded.wireframe.R

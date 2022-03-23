@@ -1,7 +1,6 @@
 package art.coded.wireframe.viewmodel
 
 import androidx.lifecycle.LiveData
-import android.content.Context
 import art.coded.wireframe.model.ElementRepository
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

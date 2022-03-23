@@ -8,7 +8,6 @@ import art.coded.wireframe.viewmodel.CustomViewModel
 import android.view.View
 import androidx.fragment.app.Fragment
 import art.coded.wireframe.databinding.FragmentCustomBinding
-import art.coded.wireframe.view.custom.CustomView
 
 private val LOG_TAG = CustomFragment::class.java.simpleName
 
@@ -18,9 +17,7 @@ class CustomFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val customViewModel = ViewModelProvider(this).get(
-            CustomViewModel::class.java
-        )
+        val customViewModel = ViewModelProvider(this).get(CustomViewModel::class.java)
         binding = FragmentCustomBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
         val textView = binding!!.textCustom

@@ -2,12 +2,9 @@ package art.coded.wireframe.viewmodel
 
 import androidx.lifecycle.LiveData
 
-import art.coded.wireframe.R
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.preference.PreferenceManager
 
 private val LOG_TAG = HomeViewModel::class.java.simpleName
 

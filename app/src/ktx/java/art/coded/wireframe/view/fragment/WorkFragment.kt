@@ -28,7 +28,7 @@ class WorkFragment : Fragment() {
         workViewModel.loadData(requireContext())
         startButton.setOnClickListener { v: View -> workViewModel.applyWork() }
         cancelButton.setOnClickListener { v: View -> workViewModel.cancelWork() }
-        workViewModel.workInfo!!.observe(viewLifecycleOwner) { workInfoList: List<WorkInfo?>? ->
+        workViewModel.workInfo.observe(viewLifecycleOwner) { workInfoList: List<WorkInfo?>? ->
             if (workInfoList == null || workInfoList.isEmpty()) return@observe
             val workInfo = workInfoList[0]
             if (workInfo!!.state.isFinished) {

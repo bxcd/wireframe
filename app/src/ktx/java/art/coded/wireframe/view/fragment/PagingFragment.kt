@@ -2,7 +2,6 @@ package art.coded.wireframe.view.fragment
 
 import androidx.paging.PagedList
 import android.app.Activity
-import android.app.Application
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
@@ -18,7 +17,6 @@ import art.coded.wireframe.model.ElementRepository
 import art.coded.wireframe.model.entity.Element
 import art.coded.wireframe.model.entity.ElementComparator
 import art.coded.wireframe.model.local.ElementRoomDatabase
-import art.coded.wireframe.viewmodel.DetailViewModel
 
 private val LOG_TAG = PagingFragment::class.java.simpleName
 
@@ -37,10 +35,8 @@ class PagingFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
         pagingAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY;
         val pagingViewModel = ViewModelProvider(this).get(PagingViewModel::class.java)
-        val detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
         val db: ElementRoomDatabase = ElementRoomDatabase.getInstance(requireContext().applicationContext)
         pagingViewModel.loadData(ElementRepository(db.elementDao()))
-        //        List<Element> elements = pagingViewModel.elementList().getValue();
         pagingViewModel.elementList()
             .observe(requireActivity()) { pagedList: PagedList<Element> ->
                 pagingAdapter.submitList(
