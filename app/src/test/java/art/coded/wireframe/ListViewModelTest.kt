@@ -21,7 +21,7 @@ import org.mockito.MockitoAnnotations
 
 // adapted from raywenderlich.com
 
-@RunWith(AndroidJUnit4::class) class ElementViewModelTest {
+@RunWith(AndroidJUnit4::class) class ListViewModelTest {
 
     @Mock private lateinit var viewModel: ListViewModel
     @Mock private lateinit var testActionPending: LiveData<Boolean>
