@@ -16,6 +16,7 @@ import art.coded.wireframe.model.ElementRepository
 import art.coded.wireframe.model.entity.Element
 import art.coded.wireframe.model.local.ElementRoomDatabase
 import art.coded.wireframe.view.adapter.ListAdapter
+import art.coded.wireframe.viewmodel.ListViewModelFactory
 
 private val LOG_TAG = ListFragment::class.java.simpleName
 
@@ -35,9 +36,11 @@ class ListFragment : Fragment() {
         listAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
         val db: ElementRoomDatabase = ElementRoomDatabase.getInstance(requireContext().applicationContext)
-        val listViewModel = ViewModelProvider(this).get(ListViewModel::class.java)
-        listViewModel.loadData(ElementRepository(db.elementDao()))
-        listViewModel.data.observe(
+        val listViewModel = ViewModelProvider(
+            this,
+            ListViewModelFactory(ElementRepository(db.elementDao())))
+                .get(ListViewModel::class.java)
+        listViewModel.getData().observe(
             viewLifecycleOwner
         ) { elementList: List<Element> -> listAdapter.setElements(elementList) }
         val touchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
