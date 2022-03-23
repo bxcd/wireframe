@@ -11,11 +11,11 @@ import androidx.work.*
 private val LOG_TAG = WorkViewModel::class.java.simpleName
 
 class WorkViewModel : ViewModel() {
-    var mWorkManager: WorkManager? = null
-    var workInfo: LiveData<List<WorkInfo>>? = null
+    lateinit var mWorkManager: WorkManager
+    lateinit var workInfo: LiveData<List<WorkInfo>>
     fun loadData(context: Context?) {
         mWorkManager = WorkManager.getInstance(context!!)
-        workInfo = mWorkManager!!.getWorkInfosByTagLiveData(WorkConstants.DEFAULT_WORK_TAG)
+        workInfo = mWorkManager.getWorkInfosByTagLiveData(WorkConstants.DEFAULT_WORK_TAG)
     }
 
     fun applyWork() {
@@ -25,7 +25,7 @@ class WorkViewModel : ViewModel() {
             .setConstraints(constraints)
             .addTag(WorkConstants.DEFAULT_WORK_TAG)
             .build()
-        var workContinuation = mWorkManager!!.beginUniqueWork(
+        var workContinuation = mWorkManager.beginUniqueWork(
             WorkConstants.DEFAULT_WORK_NAME,
             ExistingWorkPolicy.REPLACE,
             workRequest
@@ -40,6 +40,6 @@ class WorkViewModel : ViewModel() {
     }
 
     fun cancelWork() {
-        mWorkManager!!.cancelUniqueWork(WorkConstants.DEFAULT_WORK_NAME)
+        mWorkManager.cancelUniqueWork(WorkConstants.DEFAULT_WORK_NAME)
     }
 }

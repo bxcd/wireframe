@@ -12,18 +12,18 @@ import kotlinx.coroutines.launch
 private val LOG_TAG = PagingViewModel::class.java.simpleName
 
 class PagingViewModel : ViewModel() {
-    var mRepository: ElementRepository? = null
+    lateinit var mRepository: ElementRepository
     fun loadData(context: Context) {
         mRepository = ElementRepository(context)
     }
 
     fun removeData(element: Element) {
         viewModelScope.launch {
-            mRepository!!.delete(element)
+            mRepository.delete(element)
         }
     }
 
     fun elementList(): LiveData<PagedList<Element>> {
-        return mRepository!!.pagedList
+        return mRepository.pagedList
     }
 }

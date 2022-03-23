@@ -11,20 +11,20 @@ import kotlinx.coroutines.launch
 private val LOG_TAG = ListViewModel::class.java.simpleName
 
 class ListViewModel : ViewModel() {
-    private var mRepository: ElementRepository? = null
-    var data: LiveData<List<Element>>? = null
+    private lateinit var mRepository: ElementRepository
+    lateinit var data: LiveData<List<Element>>
         private set
 
     fun loadData(context: Context) {
         viewModelScope.launch {
             mRepository = ElementRepository(context)
-            data = mRepository!!.allElements
+            data = mRepository.allElements
         }
     }
 
     fun removeData(element: Element) {
         viewModelScope.launch {
-            mRepository!!.delete(element)
+            mRepository.delete(element)
         }
     }
 }
