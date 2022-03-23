@@ -28,12 +28,14 @@ abstract class ElementRoomDatabase : RoomDatabase() {
     companion object {
         private lateinit var INSTANCE: ElementRoomDatabase
         fun getInstance(context: Context?): ElementRoomDatabase {
-            synchronized(ElementRoomDatabase::class.java) {
-                INSTANCE = Room.databaseBuilder(
-                    context!!, ElementRoomDatabase::class.java, "element_database"
-                )
-                    .addCallback(sRoomDatabaseCallback)
-                    .build()
+            if (!::INSTANCE.isInitialized) {
+                synchronized(ElementRoomDatabase::class.java) {
+                    INSTANCE = Room.databaseBuilder(
+                        context!!, ElementRoomDatabase::class.java, "element_database"
+                    )
+                        .addCallback(sRoomDatabaseCallback)
+                        .build()
+                }
             }
             return INSTANCE
         }
