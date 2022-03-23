@@ -13,9 +13,6 @@ import art.coded.wireframe.databinding.FragmentHomeBinding
 
 private val LOG_TAG = HomeFragment::class.java.simpleName
 
-// TODO: Decouple contexts from business logic (model, viewmodel)
-// TODO: Encapsulate logic for each UI functionality into helper methods
-// TODO: Replace logic written inside UI lifecycle methods with helper method calls
 class HomeFragment : Fragment() {
     private var homeViewModel = HomeViewModel()
     private var binding: FragmentHomeBinding? = null
