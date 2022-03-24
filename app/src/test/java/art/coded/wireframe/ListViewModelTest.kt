@@ -41,7 +41,7 @@ import java.io.IOException
             .allowMainThreadQueries()
             .build()
 
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         repository = spy(ElementRepository(db.elementDao()))
         viewModel = spy(ListViewModel(repository))
         testActionPending = viewModel.actionPending
