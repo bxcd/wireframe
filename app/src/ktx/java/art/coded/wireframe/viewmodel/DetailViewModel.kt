@@ -1,6 +1,7 @@
 package art.coded.wireframe.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import art.coded.wireframe.model.ElementRepository
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,26 +10,33 @@ import kotlinx.coroutines.launch
 
 private val LOG_TAG = DetailViewModel::class.java.simpleName
 
-class DetailViewModel : ViewModel() {
-    lateinit var data : LiveData<List<Element>>
-        private set
-    private lateinit var mRepository: ElementRepository
-    fun loadData(repository: ElementRepository) {
+class DetailViewModel(private val repository: ElementRepository) : ViewModel() {
+
+    val actionPending = MutableLiveData<Boolean>()
+
+    fun getData(): LiveData<List<Element>> {
+        var quotes: LiveData<List<Element>>? = null
+        actionPending.postValue(true)
         viewModelScope.launch {
-            mRepository = repository
-            data = mRepository.allElements
+            quotes = repository.allElements
         }
+        actionPending.postValue(false)
+        return quotes!!
     }
 
     fun addData(element: Element) {
+        actionPending.postValue(true)
         viewModelScope.launch {
-            mRepository.insert(element)
+            repository.insert(element)
         }
+        actionPending.postValue(false)
     }
 
     fun removeAllData() {
+        actionPending.postValue(true)
         viewModelScope.launch {
-            mRepository.deleteAll()
+            repository.deleteAll()
         }
+        actionPending.postValue(false)
     }
 }
