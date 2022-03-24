@@ -6,11 +6,8 @@ import androidx.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.work.WorkManager
-import art.coded.wireframe.model.ElementRepository
-import art.coded.wireframe.model.entity.Element
-import art.coded.wireframe.model.local.ElementRoomDatabase
+import androidx.work.WorkManagerInitializer
 import art.coded.wireframe.viewmodel.WorkViewModel
-import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -19,7 +16,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
-import java.io.IOException
 
 // adapted from raywenderlich.com
 
@@ -35,7 +31,7 @@ import java.io.IOException
     @Before fun setup() {
 
         MockitoAnnotations.openMocks(this)
-        workManager = spy(WorkManager.getInstance(ApplicationProvider.getApplicationContext()))
+        workManager = spy(WorkManagerInitializer().create(ApplicationProvider.getApplicationContext()))
         viewModel = spy(WorkViewModel(workManager))
         testActionPending = viewModel.actionPending
     }
