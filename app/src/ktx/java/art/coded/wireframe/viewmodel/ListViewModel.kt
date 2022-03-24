@@ -12,13 +12,13 @@ class ListViewModel(private val repository: ElementRepository) : ViewModel() {
     val actionPending = MutableLiveData<Boolean>()
 
     fun getData(): LiveData<List<Element>> {
-        var quotes: LiveData<List<Element>>? = null
+        var elements: LiveData<List<Element>>? = null
         actionPending.postValue(true)
         viewModelScope.launch {
-            quotes = repository.allElements
+            elements = repository.allElements
         }
         actionPending.postValue(false)
-        return quotes!!
+        return elements!!
     }
 
     fun removeData(element: Element) {
