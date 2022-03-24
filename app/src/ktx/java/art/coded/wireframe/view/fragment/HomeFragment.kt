@@ -10,11 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import art.coded.wireframe.R
 import art.coded.wireframe.databinding.FragmentHomeBinding
+import art.coded.wireframe.model.ElementRepository
+import art.coded.wireframe.viewmodel.ListViewModel
+import art.coded.wireframe.viewmodel.ListViewModelFactory
 
 private val LOG_TAG = HomeFragment::class.java.simpleName
 
 class HomeFragment : Fragment() {
-    private var homeViewModel = HomeViewModel()
+    private lateinit var homeViewModel: HomeViewModel
     private var binding: FragmentHomeBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,18 +25,20 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        val sp = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val key = requireContext().getString(R.string.key_username)
+        val default = requireContext().getString(R.string.default_username)
+        homeViewModel = ViewModelProvider(
+            this,
+            HomeViewModel.HomeViewModelFactory(sp, key, default)
+        ).get(HomeViewModel::class.java)
         return root
     }
 
     override fun onResume() {
         super.onResume()
         val textView = binding!!.textHome
-        val sp = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val key = requireContext().getString(R.string.key_username)
-        val default = requireContext().getString(R.string.default_username)
-        homeViewModel.loadData(sp, key, default)
-        homeViewModel.text.observe(viewLifecycleOwner) { o: String? -> textView.text = o }
+        homeViewModel.getData().observe(viewLifecycleOwner) { o: String? -> textView.text = o }
     }
 
     override fun onDestroyView() {
