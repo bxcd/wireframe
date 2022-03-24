@@ -17,6 +17,7 @@ import org.junit.runner.RunWith
 import java.io.IOException
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 // adapted from raywenderlich.com
 
@@ -59,6 +60,16 @@ fun <T> LiveData<T>.getValueBlocking(): T? {
         db.elementDao().insert(testElement)
         assertEquals(db.elementDao().all.getValueBlocking()?.size, 1)
         db.elementDao().delete(testElement)
+        assertEquals(db.elementDao().all.getValueBlocking()?.size, 0)
+    }
+
+    @Test fun assertElementPurgeTest() {
+        val length: Int = /*Random().nextInt()*/ 99
+        for (i in 0 until length) {
+            db.elementDao().insert(Element(String.format("test%s", i), String.format("%s", i)))
+        }
+        assertEquals(db.elementDao().all.getValueBlocking()?.size, length)
+        db.elementDao().deleteAll()
         assertEquals(db.elementDao().all.getValueBlocking()?.size, 0)
     }
 
