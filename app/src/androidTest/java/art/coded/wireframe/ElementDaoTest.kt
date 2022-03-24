@@ -50,7 +50,7 @@ fun <T> LiveData<T>.getValueBlocking(): T? {
     }
 
     @Test fun assertElementInsertionTest() {
-        val length: Int = /*Random().nextInt()*/ 99
+        val length: Int = Random.nextInt(1, 200)
         for (i in 0 until length)
             db.elementDao().insert(Element(String.format("test%s", i), String.format("%s", i)))
         val elementSize = db.elementDao().all.getValueBlocking()?.size
@@ -58,7 +58,7 @@ fun <T> LiveData<T>.getValueBlocking(): T? {
     }
 
     @Test fun assertElementDeletionTest() {
-        val length: Int = /*Random().nextInt()*/ 99
+        val length: Int = Random.nextInt(1, 200)
         for (i in 0 until length)
             db.elementDao().insert(Element(String.format("test%s", i), String.format("%s", i)))
         assertEquals(db.elementDao().all.getValueBlocking()?.size, length)
@@ -68,7 +68,7 @@ fun <T> LiveData<T>.getValueBlocking(): T? {
     }
 
     @Test fun assertElementPurgeTest() {
-        val length: Int = /*Random().nextInt()*/ 99
+        val length: Int = Random.nextInt(1, 200)
         for (i in 0 until length)
             db.elementDao().insert(Element(String.format("test%s", i), String.format("%s", i)))
         assertEquals(db.elementDao().all.getValueBlocking()?.size, length)
@@ -77,7 +77,7 @@ fun <T> LiveData<T>.getValueBlocking(): T? {
     }
 
     @Test fun assertElementAsLiveDataTest() {
-        val length: Int = /*Random().nextInt()*/ 99
+        val length: Int = Random.nextInt(1, 200)
         for (i in 0 until length)
             db.elementDao().insert(Element(String.format("test%s", i), String.format("%s", i)))
         val liveDataValue = db.elementDao().all.getValueBlocking()
