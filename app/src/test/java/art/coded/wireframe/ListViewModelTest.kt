@@ -33,15 +33,14 @@ import java.io.IOException
 
     @get:Rule var instantExecutorRule = InstantTaskExecutorRule()
 
-    @Before fun initDb() {
+    @Before fun setup() {
+
         db = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
             ElementRoomDatabase::class.java)
             .allowMainThreadQueries()
             .build()
-    }
 
-    @Before fun setup() {
         MockitoAnnotations.initMocks(this)
         repository = spy(ElementRepository(db.elementDao()))
         viewModel = spy(ListViewModel(repository))
