@@ -27,10 +27,10 @@ class PagingViewModel(private val repository: ElementRepository) : ViewModel() {
             repository.delete(element)
         }
     }
+}
 
-    class PagingViewModelFactory(private val repository: ElementRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return PagingViewModel(repository) as T
-        }
+class PagingViewModelFactory(private val repository: ElementRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return PagingViewModel(repository) as T
     }
 }

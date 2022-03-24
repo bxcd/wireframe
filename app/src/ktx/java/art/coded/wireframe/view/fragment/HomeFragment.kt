@@ -10,9 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import art.coded.wireframe.R
 import art.coded.wireframe.databinding.FragmentHomeBinding
-import art.coded.wireframe.model.ElementRepository
-import art.coded.wireframe.viewmodel.ListViewModel
-import art.coded.wireframe.viewmodel.ListViewModelFactory
+import art.coded.wireframe.viewmodel.HomeViewModelFactory
 
 private val LOG_TAG = HomeFragment::class.java.simpleName
 
@@ -30,7 +28,7 @@ class HomeFragment : Fragment() {
         val default = requireContext().getString(R.string.default_username)
         homeViewModel = ViewModelProvider(
             this,
-            HomeViewModel.HomeViewModelFactory(sp, key, default)
+            HomeViewModelFactory(sp, key, default)
         ).get(HomeViewModel::class.java)
         return root
     }

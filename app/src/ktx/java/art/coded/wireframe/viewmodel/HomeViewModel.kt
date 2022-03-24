@@ -24,12 +24,12 @@ class HomeViewModel(private val sharedPreferences: SharedPreferences,
         actionPending.postValue(false)
         return text
     }
+}
 
-    class HomeViewModelFactory(private val sharedPreferences: SharedPreferences,
-                               private val key: String,
-                               private val defaultVal: String) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return HomeViewModel(sharedPreferences, key, defaultVal) as T
-        }
+class HomeViewModelFactory(private val sharedPreferences: SharedPreferences,
+                           private val key: String,
+                           private val defaultVal: String) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return HomeViewModel(sharedPreferences, key, defaultVal) as T
     }
 }

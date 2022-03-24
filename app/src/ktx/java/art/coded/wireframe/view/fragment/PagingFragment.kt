@@ -17,8 +17,7 @@ import art.coded.wireframe.model.ElementRepository
 import art.coded.wireframe.model.entity.Element
 import art.coded.wireframe.model.entity.ElementComparator
 import art.coded.wireframe.model.local.ElementRoomDatabase
-import art.coded.wireframe.viewmodel.ListViewModel
-import art.coded.wireframe.viewmodel.ListViewModelFactory
+import art.coded.wireframe.viewmodel.PagingViewModelFactory
 
 private val LOG_TAG = PagingFragment::class.java.simpleName
 
@@ -39,7 +38,7 @@ class PagingFragment : Fragment() {
         val db: ElementRoomDatabase = ElementRoomDatabase.getInstance(requireContext().applicationContext)
         val pagingViewModel = ViewModelProvider(
             this,
-            PagingViewModel.PagingViewModelFactory(ElementRepository(db.elementDao()))
+            PagingViewModelFactory(ElementRepository(db.elementDao()))
         ).get(PagingViewModel::class.java)
         pagingViewModel.getData()
             .observe(requireActivity()) { pagedList: PagedList<Element> ->
