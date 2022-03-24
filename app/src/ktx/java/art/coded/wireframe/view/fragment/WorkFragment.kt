@@ -9,7 +9,9 @@ import androidx.work.WorkInfo
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.work.WorkManager
 import art.coded.wireframe.databinding.FragmentWorkBinding
+import art.coded.wireframe.viewmodel.WorkViewModelFactory
 
 private val LOG_TAG = WorkFragment::class.java.simpleName
 
@@ -24,11 +26,14 @@ class WorkFragment : Fragment() {
         val progressBar = binding!!.workProgressBar
         val startButton = binding!!.workStartButton
         val cancelButton = binding!!.workCancelButton
-        val workViewModel = ViewModelProvider(this).get(WorkViewModel::class.java)
-        workViewModel.loadData(requireContext())
+        val workManager: WorkManager = WorkManager.getInstance(requireContext())
+        val workViewModel = ViewModelProvider(
+            this,
+            WorkViewModelFactory(workManager)
+        ).get(WorkViewModel::class.java)
         startButton.setOnClickListener { v: View -> workViewModel.applyWork() }
         cancelButton.setOnClickListener { v: View -> workViewModel.cancelWork() }
-        workViewModel.workInfo.observe(viewLifecycleOwner) { workInfoList: List<WorkInfo?>? ->
+        workViewModel.getInfo().observe(viewLifecycleOwner) { workInfoList: List<WorkInfo?>? ->
             if (workInfoList == null || workInfoList.isEmpty()) return@observe
             val workInfo = workInfoList[0]
             if (workInfo!!.state.isFinished) {
