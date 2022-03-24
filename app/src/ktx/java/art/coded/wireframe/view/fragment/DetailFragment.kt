@@ -16,8 +16,9 @@ import art.coded.wireframe.databinding.FragmentDetailBinding
 import art.coded.wireframe.model.ElementRepository
 import art.coded.wireframe.model.entity.Element
 import art.coded.wireframe.model.local.ElementRoomDatabase
+import art.coded.wireframe.viewmodel.DetailViewModelFactory
 import java.util.*
-import java.util.Date.from
+
 
 private val LOG_TAG = DetailFragment::class.java.simpleName
 
@@ -29,9 +30,12 @@ class DetailFragment : Fragment() {
     ): View {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
-        val detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
         val db: ElementRoomDatabase = ElementRoomDatabase.getInstance(requireContext().applicationContext)
-        detailViewModel.loadData(ElementRepository(db.elementDao()))
+        val detailViewModel = ViewModelProvider(
+            this,
+            DetailViewModelFactory(ElementRepository(db.elementDao()))
+        ).get(DetailViewModel::class.java)
+
         val editText = binding!!.detailEditText
         val submitButton = binding!!.detailSubmitButton
         val clearButton = binding!!.detailClearButton
