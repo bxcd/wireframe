@@ -15,7 +15,7 @@ abstract class ElementRoomDatabase : RoomDatabase() {
         var mElementDao: ElementDao
         override fun doInBackground(vararg voids: Void?): Void? {
             if (mElementDao.any.size < 1) for (i in 0..99) {
-                mElementDao.insert(Element(String.format("test%s", i), i))
+                mElementDao.insert(Element(String.format("test%s", i), String.format("%s", i)))
             }
             return null
         }

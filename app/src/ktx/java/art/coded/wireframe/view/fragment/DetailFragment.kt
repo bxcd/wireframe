@@ -7,6 +7,7 @@ import art.coded.wireframe.viewmodel.DetailViewModel
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import android.content.DialogInterface
+import android.text.format.Time
 import com.google.android.material.snackbar.Snackbar
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -15,6 +16,8 @@ import art.coded.wireframe.databinding.FragmentDetailBinding
 import art.coded.wireframe.model.ElementRepository
 import art.coded.wireframe.model.entity.Element
 import art.coded.wireframe.model.local.ElementRoomDatabase
+import java.util.*
+import java.util.Date.from
 
 private val LOG_TAG = DetailFragment::class.java.simpleName
 
@@ -35,7 +38,9 @@ class DetailFragment : Fragment() {
         submitButton.setOnClickListener { submitView: View ->
             val elementText = editText.text
             if (elementText != null) {
-                val element = Element(elementText.toString(), hashCode())
+                val element = Element(
+                    elementText.toString(),
+                    String.format("%s", Calendar.getInstance().timeInMillis))
                 detailViewModel.addData(element)
                 editText.setText("")
             }
