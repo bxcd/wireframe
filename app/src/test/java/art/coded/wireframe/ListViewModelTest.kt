@@ -25,7 +25,7 @@ import java.io.IOException
 
 @RunWith(AndroidJUnit4::class) open class ListViewModelTest {
 
-    private lateinit var db: ElementRoomDatabase
+    @Mock private lateinit var db: ElementRoomDatabase
     @Mock private lateinit var repository: ElementRepository
     @Mock private lateinit var viewModel: ListViewModel
     @Mock private lateinit var testActionPending: LiveData<Boolean>
@@ -35,13 +35,8 @@ import java.io.IOException
 
     @Before fun setup() {
 
-        db = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            ElementRoomDatabase::class.java)
-            .allowMainThreadQueries()
-            .build()
-
         MockitoAnnotations.openMocks(this)
+        db = spy(ElementRoomDatabase.getInstance(ApplicationProvider.getApplicationContext()))
         repository = spy(ElementRepository(db.elementDao()))
         viewModel = spy(ListViewModel(repository))
         testActionPending = viewModel.actionPending
