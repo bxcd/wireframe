@@ -51,39 +51,40 @@ fun <T> LiveData<T>.getValueBlocking(): T? {
 
     @Test fun assertElementInsertionTest() {
         val length: Int = /*Random().nextInt()*/ 99
-        for (i in 0 until length) {
+        for (i in 0 until length)
             db.elementDao().insert(Element(String.format("test%s", i), String.format("%s", i)))
-        }
         val elementSize = db.elementDao().all.getValueBlocking()?.size
         assertEquals(elementSize, length)
     }
 
     @Test fun assertElementDeletionTest() {
-        val testElement = Element(name = "Test Name", id = "10")
-        db.elementDao().insert(testElement)
-        assertEquals(db.elementDao().all.getValueBlocking()?.size, 1)
-        db.elementDao().delete(testElement)
+        val length: Int = /*Random().nextInt()*/ 99
+        for (i in 0 until length)
+            db.elementDao().insert(Element(String.format("test%s", i), String.format("%s", i)))
+        assertEquals(db.elementDao().all.getValueBlocking()?.size, length)
+        for (i in 0 until length)
+            db.elementDao().delete(Element(String.format("test%s", i), String.format("%s", i)))
         assertEquals(db.elementDao().all.getValueBlocking()?.size, 0)
     }
 
     @Test fun assertElementPurgeTest() {
         val length: Int = /*Random().nextInt()*/ 99
-        for (i in 0 until length) {
+        for (i in 0 until length)
             db.elementDao().insert(Element(String.format("test%s", i), String.format("%s", i)))
-        }
         assertEquals(db.elementDao().all.getValueBlocking()?.size, length)
         db.elementDao().deleteAll()
         assertEquals(db.elementDao().all.getValueBlocking()?.size, 0)
     }
 
     @Test fun assertElementAsLiveDataTest() {
-        val testElement = Element(name = "Test Name", id = "10")
-        db.elementDao().insert(testElement)
+        val length: Int = /*Random().nextInt()*/ 99
+        for (i in 0 until length)
+            db.elementDao().insert(Element(String.format("test%s", i), String.format("%s", i)))
         val liveDataValue = db.elementDao().all.getValueBlocking()
         val pagedLiveDataValue =
             LivePagedListBuilder(db.elementDao().pagingSource(), 15).build().getValueBlocking()
-        assertEquals(liveDataValue?.size, 1)
-        assertEquals(pagedLiveDataValue?.size, 1)
+        assertEquals(liveDataValue?.size, length)
+        assertEquals(pagedLiveDataValue?.size, length)
         assertEquals(liveDataValue?.size, pagedLiveDataValue?.size)
     }
 
