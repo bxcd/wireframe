@@ -3,6 +3,7 @@ package art.coded.wireframe
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.paging.LivePagedListBuilder
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -49,10 +50,12 @@ fun <T> LiveData<T>.getValueBlocking(): T? {
     }
 
     @Test fun assertElementInsertionTest() {
-        val testElement = Element(name = "Test Name", id = "10")
-        db.elementDao().insert(testElement)
+        val length: Int = /*Random().nextInt()*/ 99
+        for (i in 0 until length) {
+            db.elementDao().insert(Element(String.format("test%s", i), String.format("%s", i)))
+        }
         val elementSize = db.elementDao().all.getValueBlocking()?.size
-        assertEquals(elementSize, 1)
+        assertEquals(elementSize, length)
     }
 
     @Test fun assertElementDeletionTest() {
@@ -77,7 +80,11 @@ fun <T> LiveData<T>.getValueBlocking(): T? {
         val testElement = Element(name = "Test Name", id = "10")
         db.elementDao().insert(testElement)
         val liveDataValue = db.elementDao().all.getValueBlocking()
+        val pagedLiveDataValue =
+            LivePagedListBuilder(db.elementDao().pagingSource(), 15).build().getValueBlocking()
         assertEquals(liveDataValue?.size, 1)
+        assertEquals(pagedLiveDataValue?.size, 1)
+        assertEquals(liveDataValue?.size, pagedLiveDataValue?.size)
     }
 
     @After @Throws(IOException::class)
