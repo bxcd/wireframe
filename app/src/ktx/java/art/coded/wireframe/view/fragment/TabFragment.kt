@@ -8,6 +8,7 @@ import art.coded.wireframe.viewmodel.TabViewModel
 import android.view.View
 import androidx.fragment.app.Fragment
 import art.coded.wireframe.databinding.FragmentTabBinding
+import art.coded.wireframe.viewmodel.TabViewModelFactory
 
 private val LOG_TAG = TabFragment::class.java.simpleName
 private const val ARG_SECTION_NUMBER = "section_number"
@@ -20,7 +21,11 @@ class TabFragment : Fragment() {
     private var binding: FragmentTabBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        tabViewModel = ViewModelProvider(this).get(TabViewModel::class.java)
+        val tabViewModel = ViewModelProvider(
+            this,
+            TabViewModelFactory()
+        ).get(TabViewModel::class.java)
+        
         var index = 1
         if (arguments != null) {
             index = requireArguments().getInt(ARG_SECTION_NUMBER)
