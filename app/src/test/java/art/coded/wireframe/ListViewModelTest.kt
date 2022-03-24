@@ -56,7 +56,7 @@ import java.io.IOException
     }
 
     @Test fun assertElementRemovalTest() {
-        val testElement = Element(name = "Test Name", id = 10)
+        val testElement = Element(name = "Test Name", id = "10")
         var isPending = testActionPending.value
 //        assertNotNull(isPending)
         isPending?.let { assertTrue(it) }

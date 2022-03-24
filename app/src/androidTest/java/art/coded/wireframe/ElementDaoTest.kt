@@ -48,14 +48,14 @@ fun <T> LiveData<T>.getValueBlocking(): T? {
     }
 
     @Test fun assertElementInsertionTest() {
-        val testElement = Element(name = "Test Name", id = 10)
+        val testElement = Element(name = "Test Name", id = "10")
         db.elementDao().insert(testElement)
         val elementSize = db.elementDao().all.getValueBlocking()?.size
         assertEquals(elementSize, 1)
     }
 
     @Test fun assertElementDeletionTest() {
-        val testElement = Element(name = "Test Name", id = 10)
+        val testElement = Element(name = "Test Name", id = "10")
         db.elementDao().insert(testElement)
         assertEquals(db.elementDao().all.getValueBlocking()?.size, 1)
         db.elementDao().delete(testElement)
@@ -63,7 +63,7 @@ fun <T> LiveData<T>.getValueBlocking(): T? {
     }
 
     @Test fun assertElementAsLiveDataTest() {
-        val testElement = Element(name = "Test Name", id = 10)
+        val testElement = Element(name = "Test Name", id = "10")
         db.elementDao().insert(testElement)
         val liveDataValue = db.elementDao().all.getValueBlocking()
         assertEquals(liveDataValue?.size, 1)
