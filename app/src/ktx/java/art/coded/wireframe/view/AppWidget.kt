@@ -50,7 +50,7 @@ class AppWidget : AppWidgetProvider() {
      */
     class AppWidgetRemoteViewsFactory internal constructor(private val context: Context) :
         RemoteViewsService.RemoteViewsFactory {
-        private var mElementDao: ElementDao = ElementRoomDatabase.getInstance(context).elementDao()
+        private val mElementDao: ElementDao = ElementRoomDatabase.getInstance(context).elementDao()
         private var mElementList: List<Element>? = mElementDao.allUnwrapped
 
         /**

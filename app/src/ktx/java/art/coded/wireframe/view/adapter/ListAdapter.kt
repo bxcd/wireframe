@@ -15,7 +15,7 @@ private val LOG_TAG = ListAdapter::class.java.simpleName
 
 class ListAdapter(val activity: Activity?) :
     RecyclerView.Adapter<ListAdapter.ElementViewHolder>() {
-    private var layoutInflater: LayoutInflater = LayoutInflater.from(activity)
+    private val layoutInflater: LayoutInflater = LayoutInflater.from(activity)
     private var allElements: List<Element>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ElementViewHolder {
         val itemView = layoutInflater.inflate(R.layout.list_item, parent, false)

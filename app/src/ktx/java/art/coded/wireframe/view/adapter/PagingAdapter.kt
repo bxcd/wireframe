@@ -15,7 +15,7 @@ import art.coded.wireframe.model.entity.Element
 
 private val LOG_TAG = PagingAdapter::class.java.simpleName
 
-class PagingAdapter(diffCallback: DiffUtil.ItemCallback<Element>, var activity: Activity) :
+class PagingAdapter(diffCallback: DiffUtil.ItemCallback<Element>, val activity: Activity) :
     PagedListAdapter<Element, PagingAdapter.ElementViewHolder>(diffCallback) {
     private val layoutInflater: LayoutInflater = LayoutInflater.from(activity)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ElementViewHolder {

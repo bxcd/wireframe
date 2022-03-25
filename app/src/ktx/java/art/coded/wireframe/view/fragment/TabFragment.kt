@@ -17,11 +17,11 @@ private const val ARG_SECTION_NUMBER = "section_number"
  * A custom fragment containing a simple view.
  */
 class TabFragment : Fragment() {
-    private var tabViewModel = TabViewModel()
+    private lateinit var tabViewModel : TabViewModel
     private var binding: FragmentTabBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val tabViewModel = ViewModelProvider(
+        tabViewModel = ViewModelProvider(
             this,
             TabViewModelFactory()
         ).get(TabViewModel::class.java)
