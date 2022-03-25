@@ -11,7 +11,6 @@ private val LOG_TAG = DefaultWorker::class.java.simpleName
 class DefaultWorker(context: Context, workerParams: WorkerParameters) :
     Worker(context, workerParams) {
     override fun doWork(): Result {
-        val applicationContext = applicationContext
         return try {
             WorkUtilities.loadNotificationChannel(
                 applicationContext,
@@ -20,6 +19,7 @@ class DefaultWorker(context: Context, workerParams: WorkerParameters) :
                 WorkConstants.CHANNEL_DESCRIPTION,
                 WorkConstants.CHANNEL_IMPORTANCE
             )
+
             val notificationStarted =
                 NotificationCompat.Builder(applicationContext, WorkConstants.CHANNEL_ID)
                     .setSmallIcon(android.R.drawable.ic_menu_manage)
@@ -28,6 +28,7 @@ class DefaultWorker(context: Context, workerParams: WorkerParameters) :
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setVibrate(LongArray(0))
                     .build()
+
             NotificationManagerCompat.from(applicationContext)
                 .notify(WorkConstants.NOTIFICATION_ID_STARTED, notificationStarted)
 
@@ -39,6 +40,7 @@ class DefaultWorker(context: Context, workerParams: WorkerParameters) :
                 Log.d(LOG_TAG, "failure" + e.message)
                 return Result.failure()
             }
+
             val notificationFinished =
                 NotificationCompat.Builder(applicationContext, WorkConstants.CHANNEL_ID)
                     .setSmallIcon(android.R.drawable.ic_menu_manage)
@@ -47,8 +49,10 @@ class DefaultWorker(context: Context, workerParams: WorkerParameters) :
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setVibrate(LongArray(0))
                     .build()
+
             NotificationManagerCompat.from(applicationContext)
                 .notify(WorkConstants.NOTIFICATION_ID_FINISHED, notificationFinished)
+
             Log.d(LOG_TAG, "success")
             Result.success()
         } catch (t: Throwable) {

@@ -13,54 +13,48 @@ import art.coded.wireframe.model.entity.Element
 
 private val LOG_TAG = ListAdapter::class.java.simpleName
 
-class ListAdapter(var mActivity: Activity?) :
+class ListAdapter(val activity: Activity?) :
     RecyclerView.Adapter<ListAdapter.ElementViewHolder>() {
-    var mLayoutInflater: LayoutInflater
-    var mAllElements: List<Element>? = null
+    private var layoutInflater: LayoutInflater = LayoutInflater.from(activity)
+    private var allElements: List<Element>? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ElementViewHolder {
-        val itemView = mLayoutInflater.inflate(R.layout.list_item, parent, false)
-        return ElementViewHolder(itemView, mActivity)
+        val itemView = layoutInflater.inflate(R.layout.list_item, parent, false)
+        return ElementViewHolder(itemView, activity)
     }
 
     override fun onBindViewHolder(holder: ElementViewHolder, position: Int) {
-        if (mAllElements != null) {
-            val element = mAllElements!![position]
-            holder.mItemView.text = element?.name ?: "No elements"
+        if (allElements != null) {
+            val element = allElements!![position]
+            holder.textView.text = element.name ?: "No elements"
         }
     }
 
     override fun getItemCount(): Int {
-        return if (mAllElements == null) 0 else mAllElements!!.size
+        return if (allElements == null) 0 else allElements!!.size
     }
 
     fun setElements(elements: List<Element>) {
-        mAllElements = elements
+        allElements = elements
         notifyDataSetChanged()
     }
 
     fun getNameByPosition(position: Int): Element {
-        return mAllElements!![position]
+        return allElements!![position]
     }
 
     class ElementViewHolder(itemView: View, activity: Activity?) :
         RecyclerView.ViewHolder(itemView) {
-        val mItemView: TextView
-        private val mImageButton: ImageButton
+        val textView: TextView = itemView.findViewById(R.id.textView)
+        private val imageButton: ImageButton = itemView.findViewById(R.id.list_button_share)
 
         init {
-            mItemView = itemView.findViewById(R.id.textView)
-            mImageButton = itemView.findViewById(R.id.list_button_share)
-            mImageButton.setOnClickListener { view: View ->
+            imageButton.setOnClickListener { view: View ->
                 ShareCompat.IntentBuilder
                     .from(activity!!)
                     .setType("text/plain")
-                    .setText(mItemView.text)
+                    .setText(textView.text)
                     .startChooser()
             }
         }
-    }
-
-    init {
-        mLayoutInflater = LayoutInflater.from(mActivity)
     }
 }

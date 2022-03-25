@@ -51,7 +51,7 @@ class AppWidget : AppWidgetProvider() {
     class AppWidgetRemoteViewsFactory internal constructor(private val context: Context) :
         RemoteViewsService.RemoteViewsFactory {
         private var mElementDao: ElementDao = ElementRoomDatabase.getInstance(context).elementDao()
-        var mElementList: List<Element>? = mElementDao.allUnwrapped
+        private var mElementList: List<Element>? = mElementDao.allUnwrapped
 
         /**
          * Triggered when remote collection adapter invokes notifyDataSetChanged; synchronous processing

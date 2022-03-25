@@ -15,38 +15,32 @@ import art.coded.wireframe.model.entity.Element
 
 private val LOG_TAG = PagingAdapter::class.java.simpleName
 
-class PagingAdapter(diffCallback: DiffUtil.ItemCallback<Element>, var mActivity: Activity) :
+class PagingAdapter(diffCallback: DiffUtil.ItemCallback<Element>, var activity: Activity) :
     PagedListAdapter<Element, PagingAdapter.ElementViewHolder>(diffCallback) {
-    var mLayoutInflater: LayoutInflater
+    private val layoutInflater: LayoutInflater = LayoutInflater.from(activity)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ElementViewHolder {
-        val itemView = mLayoutInflater.inflate(R.layout.list_item, parent, false)
-        return ElementViewHolder(itemView, mActivity)
+        val itemView = layoutInflater.inflate(R.layout.list_item, parent, false)
+        return ElementViewHolder(itemView, activity)
     }
 
     override fun onBindViewHolder(holder: ElementViewHolder, position: Int) {
         val element = getItem(position)
-        holder.mItemView.text = element?.name ?: "No elements"
+        holder.textView.text = element?.name ?: "No elements"
     }
 
     class ElementViewHolder(itemView: View, activity: Activity?) :
         RecyclerView.ViewHolder(itemView) {
-        val mItemView: TextView
-        private val mImageButton: ImageButton
+        val textView: TextView = itemView.findViewById(R.id.textView)
+        private val imageButton: ImageButton = itemView.findViewById(R.id.list_button_share)
 
         init {
-            mItemView = itemView.findViewById(R.id.textView)
-            mImageButton = itemView.findViewById(R.id.list_button_share)
-            mImageButton.setOnClickListener { view: View ->
+            imageButton.setOnClickListener { view: View ->
                 ShareCompat.IntentBuilder
                     .from(activity!!)
                     .setType("text/plain")
-                    .setText(mItemView.text)
+                    .setText(textView.text)
                     .startChooser()
             }
         }
-    }
-
-    init {
-        mLayoutInflater = LayoutInflater.from(mActivity)
     }
 }

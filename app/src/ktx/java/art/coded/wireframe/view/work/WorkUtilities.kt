@@ -20,7 +20,7 @@ internal object WorkUtilities {
             notificationChannel.description = channelDescription
             val notificationManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager?.createNotificationChannel(notificationChannel)
+            notificationManager.createNotificationChannel(notificationChannel)
         }
     }
 }

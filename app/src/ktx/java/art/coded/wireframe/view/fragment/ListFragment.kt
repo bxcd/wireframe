@@ -55,8 +55,7 @@ class ListFragment : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapterPosition = viewHolder.adapterPosition
-                val element = listAdapter.getNameByPosition(adapterPosition)
+                val element = listAdapter.getNameByPosition(viewHolder.bindingAdapterPosition)
                 listViewModel.removeData(element)
             }
         })

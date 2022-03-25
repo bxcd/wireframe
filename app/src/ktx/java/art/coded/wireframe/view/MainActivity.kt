@@ -14,7 +14,7 @@ import art.coded.wireframe.model.entity.Element
 private val LOG_TAG = Element::class.java.simpleName
 
 class MainActivity : AppCompatActivity() {
-    private var mAppBarConfiguration: AppBarConfiguration? = null
+    private var appBarConfiguration: AppBarConfiguration? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -28,13 +28,13 @@ class MainActivity : AppCompatActivity() {
         // Drawer
         val drawer = binding.drawerLayout
         val navigationView = binding.navView
-        mAppBarConfiguration = AppBarConfiguration.Builder(
+        appBarConfiguration = AppBarConfiguration.Builder(
             R.id.nav_home, R.id.nav_list, R.id.nav_work, R.id.nav_paging, R.id.nav_custom
         )
             .setOpenableLayout(drawer)
             .build()
         val navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main)
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration!!)
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration!!)
         NavigationUI.setupWithNavController(navigationView, navController)
     }
 
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         // Custom implementation required for drawer navigation
         val navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main)
-        return (NavigationUI.navigateUp(navController, mAppBarConfiguration!!)
+        return (NavigationUI.navigateUp(navController, appBarConfiguration!!)
                 || super.onSupportNavigateUp())
     }
 }

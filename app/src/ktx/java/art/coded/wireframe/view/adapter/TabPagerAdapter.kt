@@ -15,7 +15,7 @@ private val LOG_TAG = TabPagerAdapter::class.java.simpleName
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class TabPagerAdapter(private val mContext: Context, fm: FragmentManager?) : FragmentPagerAdapter(
+class TabPagerAdapter(private val context: Context, fm: FragmentManager?) : FragmentPagerAdapter(
     fm!!
 ) {
     override fun getItem(position: Int): Fragment {
@@ -25,7 +25,7 @@ class TabPagerAdapter(private val mContext: Context, fm: FragmentManager?) : Fra
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return mContext.resources.getString(TAB_TITLES[position])
+        return context.resources.getString(TAB_TITLES[position])
     }
 
     override fun getCount(): Int {
