@@ -15,7 +15,7 @@ import art.coded.wireframe.model.entity.Element
 import art.coded.wireframe.model.local.ElementDao
 import art.coded.wireframe.model.local.ElementRoomDatabase
 
-private val LOG_TAG: String = AppWidget::class.java.getSimpleName()
+private val LOG_TAG: String = AppWidget::class.java.simpleName
 
 /**
  * Provides a home screen interface that displays user data and offers navigation shortcuts.
@@ -48,12 +48,10 @@ class AppWidget : AppWidgetProvider() {
     /**
      * Builds [RemoteViews] for populating remote collections.
      */
-    class AppWidgetRemoteViewsFactory internal constructor(context: Context) :
+    class AppWidgetRemoteViewsFactory internal constructor(private val context: Context) :
         RemoteViewsService.RemoteViewsFactory {
-        var mContext: Context
-        var mElementList: List<Element>? = null
-
-        var mElementDao: ElementDao
+        private var mElementDao: ElementDao = ElementRoomDatabase.getInstance(context).elementDao()
+        var mElementList: List<Element>? = mElementDao.allUnwrapped
 
         /**
          * Triggered when remote collection adapter invokes notifyDataSetChanged; synchronous processing
@@ -67,7 +65,7 @@ class AppWidget : AppWidgetProvider() {
             } catch (e: InterruptedException) {
                 throw RuntimeException("AppWidget is unable to refresh", e)
             }
-            refresh(mContext)
+            refresh(context)
             Binder.restoreCallingIdentity(token)
         }
 
@@ -76,40 +74,18 @@ class AppWidget : AppWidgetProvider() {
          */
         override fun getViewAt(position: Int): RemoteViews {
             val name: String = mElementList!![position].name
-            val remoteViews = RemoteViews(mContext.getPackageName(), R.layout.item_widget)
+            val remoteViews = RemoteViews(context.getPackageName(), R.layout.item_widget)
             remoteViews.setTextViewText(R.id.widget_item_name, name)
             return remoteViews
         }
 
-        override fun onCreate() {
-        }
-
-        override fun onDestroy() {
-        }
-
-        override fun getCount() : Int {
-            return if (mElementList != null) mElementList!!.size else 0
-        }
-
-        override fun getLoadingView(): RemoteViews? {
-            return null
-        }
-
-        override fun getViewTypeCount(): Int {
-            return 1
-        }
-
-        override fun getItemId(position: Int): Long {
-            return position.toLong()
-        }
-
-        override fun hasStableIds(): Boolean {
-            return false
-        }
-        init {
-            mContext = context
-            mElementDao = ElementRoomDatabase.getInstance(mContext).elementDao()
-        }
+        override fun onCreate() {}
+        override fun onDestroy() {}
+        override fun getCount() : Int { return if (mElementList != null) mElementList!!.size else 0 }
+        override fun getLoadingView(): RemoteViews? { return null }
+        override fun getViewTypeCount(): Int { return 1 }
+        override fun getItemId(position: Int): Long { return position.toLong() }
+        override fun hasStableIds(): Boolean { return false }
     }
 
     // TODO: Address refresh-notify call pattern
